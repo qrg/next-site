@@ -20,12 +20,12 @@ function getCategoryPath(routes) {
 }
 
 function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
-  const { asPath, query } = useRouter();
+  const { query } = useRouter();
   const { slug } = query;
 
   return currentRoutes.map(({ path, title, routes }) => {
     if (routes) {
-      const selected = asPath.startsWith(getCategoryPath(routes));
+      const selected = slug.startsWith(getCategoryPath(routes));
 
       return (
         <Category level={level} title={title} selected={selected}>
@@ -35,9 +35,10 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
     }
 
     const pathname = removeFromLast(path, '.');
-    const selected = asPath === '/docs' ? false : asPath.startsWith(pathname);
+    const href = `/docs?slug=${pathname}`;
+    const selected = slug === '/docs' ? false : slug.startsWith(pathname);
 
-    return <Post key={path} level={level} route={{ slug, path, title, pathname, selected }} />;
+    return <Post key={path} level={level} route={{ href, path, title, pathname, selected }} />;
   });
 }
 

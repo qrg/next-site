@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import cn from 'classnames';
 
-function NavLink({ route: { pathname, slug, title, selected }, onClick }) {
+function NavLink({ route: { href, pathname, title, selected }, onClick }) {
   const router = useRouter();
   const onlyHashChange = pathname === router.pathname;
 
@@ -14,7 +14,7 @@ function NavLink({ route: { pathname, slug, title, selected }, onClick }) {
           {title}
         </a>
       ) : (
-        <Link href={slug} as={pathname}>
+        <Link href={href} as={pathname}>
           <a onClick={onClick}>{title}</a>
         </Link>
       )}
@@ -27,9 +27,9 @@ function NavLink({ route: { pathname, slug, title, selected }, onClick }) {
         }
         .nav-link :global(a) {
           text-decoration: none;
-          font-size: var(--font-size-primary);
-          line-height: var(--line-height-primary);
-          color: var(--accents-6);
+          font-size: 1rem;
+          line-height: 1.5rem;
+          color: #444444;
           box-sizing: border-box;
         }
         .selected :global(a) {

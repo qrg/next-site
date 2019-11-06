@@ -4,7 +4,7 @@ import ArrowRightSidebar from '../icons/arrow-right-sidebar';
 
 export default function Category({ level = 1, title, selected, children }) {
   const levelClass = `level-${level}`;
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(selected);
   const toggleCategory = () => setToggle(!toggle);
 
   return (
@@ -16,13 +16,13 @@ export default function Category({ level = 1, title, selected, children }) {
       <div className="posts">{children}</div>
       <style jsx>{`
         .label {
-          font-size: var(--font-size-primary);
-          line-height: var(--line-height-primary);
+          font-size: 1rem;
+          line-height: 1.5rem;
           font-weight: 400;
           cursor: pointer;
           display: flex;
           align-items: center;
-          color: var(--accents-6);
+          color: #444444;
         }
         .label :global(svg) {
           margin-right: 14px;
@@ -41,8 +41,8 @@ export default function Category({ level = 1, title, selected, children }) {
           transform: rotate(90deg);
         }
         .level-2 .label {
-          font-size: var(--font-size-primary);
-          line-height: var(--line-height-primary);
+          font-size: 1rem;
+          line-height: 1.5rem;
           text-transform: none;
           letter-spacing: 0;
         }
