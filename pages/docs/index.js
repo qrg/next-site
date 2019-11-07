@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { SkipNavContent } from '@reach/skip-nav';
 import fetchDocsManifest from '../../lib/fetch-docs-manifest';
+import markdownToHtml from '../../lib/markdown-to-html';
+import { getRawFileFromRepo } from '../../lib/github';
 import Page from '../../components/page';
 import Header from '../../components/header';
 import Navbar from '../../components/navbar';
@@ -25,10 +27,11 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
 
   return currentRoutes.map(({ path, title, routes }) => {
     if (routes) {
-      const selected = slug.startsWith(getCategoryPath(routes));
+      const pathname = getCategoryPath(routes);
+      const selected = slug.startsWith(pathname);
 
       return (
-        <Category level={level} title={title} selected={selected}>
+        <Category key={pathname} level={level} title={title} selected={selected}>
           <SidebarRoutes routes={routes} level={level + 1} />
         </Category>
       );
@@ -38,11 +41,11 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
     const href = `/docs?slug=${pathname}`;
     const selected = slug === '/docs' ? false : slug.startsWith(pathname);
 
-    return <Post key={path} level={level} route={{ href, path, title, pathname, selected }} />;
+    return <Post key={title} level={level} route={{ href, path, title, pathname, selected }} />;
   });
 }
 
-const Docs = ({ routes }) => (
+const Docs = ({ routes, html }) => (
   <Page>
     <Header height={64} shadow defaultActive>
       <Navbar />
@@ -52,6 +55,8 @@ const Docs = ({ routes }) => (
         <Sidebar>
           <SidebarRoutes routes={routes} />
         </Sidebar>
+        {/* eslint-disable-next-line */}
+        <div className="docs" dangerouslySetInnerHTML={{ __html: html }} />
       </div>
       <style jsx>{`
         .content {
@@ -72,9 +77,43 @@ const Docs = ({ routes }) => (
   </Page>
 );
 
-Docs.getInitialProps = async () => {
+function findRouteByPath(path, routes) {
+  return routes.find(route =>
+    route.path
+      ? removeFromLast(route.path, '.') === path
+      : route.routes && findRouteByPath(path, route.routes)
+  );
+}
+
+// export async function unstable_getStaticParams() {
+//   // const { routes } = await fetchDocsManifest();
+//   console.log('HELLO YOU PIECE OF SHIT');
+//   return ['/docs/getting-started', { slug: '/docs/getting-started' }];
+// }
+
+// export async function unstable_getStaticProps(obj, obj2, obj3) {
+//   console.log('OBJ', obj, obj2, obj3);
+
+//   const { routes } = await fetchDocsManifest();
+//   const route = findRouteByPath(obj.params.slug, routes);
+//   const md = await getRawFileFromRepo(route.path);
+//   const html = await markdownToHtml(md);
+
+//   return {
+//     props: { routes, html },
+//     revalidate: 1
+//   };
+// }
+
+Docs.getInitialProps = async ({ query }) => {
   const manifest = await fetchDocsManifest();
-  return manifest;
+  const route = findRouteByPath(query.slug, manifest.routes);
+  const md = await getRawFileFromRepo(route.path);
+  const html = await markdownToHtml(md);
+
+  console.log('HTML', html);
+
+  return { routes: manifest.routes, html };
 };
 
 export default Docs;
