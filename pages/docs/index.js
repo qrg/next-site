@@ -78,11 +78,15 @@ const Docs = ({ routes, html }) => (
 );
 
 function findRouteByPath(path, routes) {
-  return routes.find(route =>
-    route.path
-      ? removeFromLast(route.path, '.') === path
-      : route.routes && findRouteByPath(path, route.routes)
-  );
+  // eslint-disable-next-line
+  for (const route of routes) {
+    if (route.path && removeFromLast(route.path, '.') === path) {
+      return route;
+    }
+    if (route.routes) {
+      return findRouteByPath(path, route.routes);
+    }
+  }
 }
 
 // export async function unstable_getStaticParams() {
@@ -111,7 +115,7 @@ Docs.getInitialProps = async ({ query }) => {
   const md = await getRawFileFromRepo(route.path);
   const html = await markdownToHtml(md);
 
-  console.log('HTML', html);
+  // console.log('HTML', html);
 
   return { routes: manifest.routes, html };
 };
