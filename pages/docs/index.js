@@ -83,9 +83,8 @@ function findRouteByPath(path, routes) {
     if (route.path && removeFromLast(route.path, '.') === path) {
       return route;
     }
-    if (route.routes) {
-      return findRouteByPath(path, route.routes);
-    }
+    const childPath = route.routes && findRouteByPath(path, route.routes);
+    if (childPath) return childPath;
   }
 }
 
