@@ -9,7 +9,7 @@ const Sidebar = ({ active, children, innerRef, fixed }) => {
           background: #fff;
           padding-bottom: 40px;
           padding-right: 24px;
-          width: 280px;
+          width: 300px;
           -webkit-overflow-scrolling: touch;
           flex-shrink: 0;
         }

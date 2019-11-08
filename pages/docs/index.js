@@ -7,6 +7,7 @@ import Page from '../../components/page';
 import Header from '../../components/header';
 import Navbar from '../../components/navbar';
 import Container from '../../components/container';
+import DocsPage from '../../components/docs/docs-page';
 import SocialMeta from '../../components/social-meta';
 import Footer from '../../components/footer';
 import { Sidebar, Post, Category } from '../../components/sidebar';
@@ -55,8 +56,7 @@ const Docs = ({ routes, html }) => (
         <Sidebar>
           <SidebarRoutes routes={routes} />
         </Sidebar>
-        {/* eslint-disable-next-line */}
-        <div className="docs" dangerouslySetInnerHTML={{ __html: html }} />
+        <DocsPage html={html} />
       </div>
       <style jsx>{`
         .content {
@@ -90,15 +90,12 @@ function findRouteByPath(path, routes) {
 
 // export async function unstable_getStaticParams() {
 //   // const { routes } = await fetchDocsManifest();
-//   console.log('HELLO YOU PIECE OF SHIT');
 //   return ['/docs/getting-started', { slug: '/docs/getting-started' }];
 // }
 
-// export async function unstable_getStaticProps(obj, obj2, obj3) {
-//   console.log('OBJ', obj, obj2, obj3);
-
+// export async function unstable_getStaticProps({ params } {
 //   const { routes } = await fetchDocsManifest();
-//   const route = findRouteByPath(obj.params.slug, routes);
+//   const route = findRouteByPath(params.slug, routes);
 //   const md = await getRawFileFromRepo(route.path);
 //   const html = await markdownToHtml(md);
 
