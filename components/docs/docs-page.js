@@ -5,14 +5,26 @@ export default memo(function DocsPage({ html }) {
     <>
       {/* eslint-disable-next-line */}
       <div className="docs" dangerouslySetInnerHTML={{ __html: html }} />
+      <style jsx>{`
+        .docs {
+          max-width: calc(100% - 300px); /* Exclude size of the navbar */
+        }
+      `}</style>
       <style jsx global>{`
          {
           /* Headings */
         }
+        .docs h2,
+        h3 {
+          margin-top: 2.5rem;
+        }
         .docs h1 {
-          line-height: 1.5;
           font-size: 3rem;
           font-weight: 700;
+        }
+        .docs h2 {
+          font-size: 2rem;
+          font-weight: 600;
         }
 
          {
@@ -44,6 +56,9 @@ export default memo(function DocsPage({ html }) {
          {
           /* Links */
         }
+        .docs a > code.inline {
+          color: #0074de;
+        }
         .docs a:hover > code.inline {
           color: #68b5fb;
         }
@@ -58,6 +73,37 @@ export default memo(function DocsPage({ html }) {
         }
         .docs a[href^='#']:hover > code.inline {
           color: gray;
+        }
+
+         {
+          /* details */
+        }
+        .docs details {
+          margin: 1rem 0;
+          padding: 0 0.5rem;
+          background: #f9f9f9;
+        }
+        .docs details[open] {
+          overflow: hidden;
+        }
+        .docs details > summary {
+          cursor: pointer;
+          font-weight: 500;
+        }
+
+         {
+          /* Quotes */
+        }
+        .docs blockquote {
+          margin: 1rem 0;
+          padding: 1rem 1.25rem;
+          background: #f7f7f7;
+        }
+        .docs blockquote p {
+          margin: 0;
+        }
+        .docs blockquote pre {
+          background: white;
         }
       `}</style>
     </>
