@@ -105,6 +105,11 @@ export default memo(function DocsPage({ html }) {
         .docs blockquote pre {
           background: white;
         }
+
+        .docs hr {
+          border: 0;
+          border-top: 1px solid #f3f3f3;
+        }
       `}</style>
     </>
   );
