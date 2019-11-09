@@ -14,10 +14,6 @@ export default memo(function DocsPage({ html }) {
          {
           /* Headings */
         }
-        .docs .heading {
-          margin-top: 2.5rem;
-          font-weight: 600;
-        }
         .docs h1 {
           font-size: 3rem;
           font-weight: 700;
@@ -31,16 +27,39 @@ export default memo(function DocsPage({ html }) {
         .docs h4 {
           font-size: 1.2rem;
         }
-        .docs .heading span[id] {
-          margin-top: -208px;
-          padding-top: 208px;
+        .docs .heading {
+          margin-top: 2.5rem;
+          font-weight: 600;
         }
-        .docs .heading a {
+        .docs .heading > span[id] {
+          display: block;
+          position: absolute;
+          visibility: hidden;
+          margin-top: -128px;
+          padding-top: 128px;
+        }
+        .docs .heading > a {
           color: inherit;
         }
-        .docs .heading a:hover {
+        .docs .heading > a:hover {
           color: inherit;
           border-bottom: 1px dotted;
+        }
+        .docs .heading > a:hover ~ .permalink {
+          visibility: visible;
+        }
+        .docs .heading > .permalink {
+          visibility: hidden;
+          display: none;
+        }
+
+        @media (min-width: 992px) {
+          .docs .heading > a {
+            margin-right: 0.5rem;
+          }
+          .docs .heading > .permalink {
+            display: inline-block;
+          }
         }
 
          {
