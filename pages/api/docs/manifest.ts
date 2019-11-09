@@ -3,7 +3,7 @@ import setHeaders from '../../../lib/api-utils/set-headers';
 import { getRawFileFromRepo } from '../../../lib/github';
 
 export default async function manifest(req: NextApiRequest, res: NextApiResponse) {
-  if (setHeaders(req, res, 300)) return;
+  if (setHeaders(req, res, 60)) return;
 
   try {
     res.json(await getRawFileFromRepo('/docs/manifest.json'));

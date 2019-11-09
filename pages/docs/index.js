@@ -46,6 +46,17 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
   });
 }
 
+function findRouteByPath(path, routes) {
+  // eslint-disable-next-line
+  for (const route of routes) {
+    if (route.path && removeFromLast(route.path, '.') === path) {
+      return route;
+    }
+    const childPath = route.routes && findRouteByPath(path, route.routes);
+    if (childPath) return childPath;
+  }
+}
+
 const Docs = ({ routes, html }) => (
   <Page>
     <Header height={64} shadow defaultActive>
@@ -77,17 +88,6 @@ const Docs = ({ routes, html }) => (
   </Page>
 );
 
-function findRouteByPath(path, routes) {
-  // eslint-disable-next-line
-  for (const route of routes) {
-    if (route.path && removeFromLast(route.path, '.') === path) {
-      return route;
-    }
-    const childPath = route.routes && findRouteByPath(path, route.routes);
-    if (childPath) return childPath;
-  }
-}
-
 // export async function unstable_getStaticParams() {
 //   // const { routes } = await fetchDocsManifest();
 //   return ['/docs/getting-started', { slug: '/docs/getting-started' }];
@@ -105,19 +105,16 @@ function findRouteByPath(path, routes) {
 //   };
 // }
 
-Docs.getInitialProps = async ({ query }) => {
+// NOTE: temporal code until iSSG is properly implemented for the page
+Docs.getInitialProps = async ({ res, query }) => {
   const manifest = await fetchDocsManifest();
   const route = findRouteByPath(query.slug, manifest.routes);
   const md = await getRawFileFromRepo(route.path);
   const html = await markdownToHtml(md);
 
-  // console.log('HTML', html);
+  if (res) res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
 
   return { routes: manifest.routes, html };
 };
 
 export default Docs;
-
-// export const config = {
-//   amp: true
-// };
