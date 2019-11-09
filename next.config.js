@@ -35,8 +35,8 @@ const withMDX = nextMDX({
 const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.ANALYZE === 'true' });
 
 // To test the API use localhost here
-// const BACKEND_URL = 'http://localhost:3000';
-const BACKEND_URL = process.env.BACKEND_URL || 'https://nextjs.org';
+const BACKEND_URL = 'https://next-site-git-new-docs.zeit.now.sh';
+// const BACKEND_URL = process.env.BACKEND_URL || 'https://nextjs.org';
 
 const nextConfig = {
   pageExtensions: ['jsx', 'js', 'ts', 'tsx', 'mdx'],
