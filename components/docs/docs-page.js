@@ -14,9 +14,9 @@ export default memo(function DocsPage({ html }) {
          {
           /* Headings */
         }
-        .docs h2,
-        h3 {
+        .docs .heading {
           margin-top: 2.5rem;
+          font-weight: 600;
         }
         .docs h1 {
           font-size: 3rem;
@@ -24,7 +24,23 @@ export default memo(function DocsPage({ html }) {
         }
         .docs h2 {
           font-size: 2rem;
-          font-weight: 600;
+        }
+        .docs h3 {
+          font-size: 1.5rem;
+        }
+        .docs h4 {
+          font-size: 1.2rem;
+        }
+        .docs .heading span[id] {
+          margin-top: -208px;
+          padding-top: 208px;
+        }
+        .docs .heading a {
+          color: inherit;
+        }
+        .docs .heading a:hover {
+          color: inherit;
+          border-bottom: 1px dotted;
         }
 
          {
@@ -106,6 +122,9 @@ export default memo(function DocsPage({ html }) {
           background: white;
         }
 
+         {
+          /* Misc */
+        }
         .docs hr {
           border: 0;
           border-top: 1px solid #f3f3f3;
