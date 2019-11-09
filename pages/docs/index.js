@@ -110,7 +110,7 @@ Docs.getInitialProps = async ({ res, query }) => {
   const manifest = await fetchDocsManifest();
   const route = findRouteByPath(query.slug, manifest.routes);
   const md = await getRawFileFromRepo(route.path);
-  const html = await markdownToHtml(md);
+  const html = await markdownToHtml(route.path, md);
 
   if (res) res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
 
