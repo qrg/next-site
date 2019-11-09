@@ -17,6 +17,10 @@ function removeFromLast(path, key) {
   return i === -1 ? path : path.substring(0, i);
 }
 
+function getSlug(query) {
+  return query.slug === '/docs' ? '/docs/getting-started' : query.slug;
+}
+
 function getCategoryPath(routes) {
   const route = routes.find(r => r.path);
   return route && removeFromLast(route.path, '/');
@@ -24,7 +28,7 @@ function getCategoryPath(routes) {
 
 function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
   const { query } = useRouter();
-  const { slug } = query;
+  const slug = getSlug(query);
 
   return currentRoutes.map(({ path, title, routes }) => {
     if (routes) {
@@ -107,8 +111,9 @@ const Docs = ({ routes, html }) => (
 
 // NOTE: temporal code until iSSG is properly implemented for the page
 Docs.getInitialProps = async ({ res, query }) => {
+  const slug = getSlug(query);
   const manifest = await fetchDocsManifest();
-  const route = findRouteByPath(query.slug, manifest.routes);
+  const route = findRouteByPath(slug, manifest.routes);
   const md = await getRawFileFromRepo(route.path);
   const html = await markdownToHtml(route.path, md);
 
