@@ -56,22 +56,22 @@ export default memo(function DocsPage({ html }) {
          {
           /* Links */
         }
-        .docs a > code.inline {
+        .docs a:not(.relative) > code.inline {
           color: #0074de;
         }
         .docs a:hover > code.inline {
           color: #68b5fb;
         }
-        .docs a[href^='#'] {
+        .docs a.relative {
           color: inherit;
           font-size: inherit;
           border-bottom: 1px dotted;
         }
-        .docs a[href^='#']:hover {
+        .docs a.relative:hover {
           color: gray;
           text-decoration: none;
         }
-        .docs a[href^='#']:hover > code.inline {
+        .docs a.relative:hover > code.inline {
           color: gray;
         }
 
