@@ -91,10 +91,10 @@ export default memo(function DocsPage({ html }) {
          {
           /* Links */
         }
-        .docs a:not(.relative) > code.inline {
+        .docs a.absolute > code.inline {
           color: #0074de;
         }
-        .docs a:hover > code.inline {
+        .docs a.absolute:hover > code.inline {
           color: #68b5fb;
         }
         .docs a.relative {
