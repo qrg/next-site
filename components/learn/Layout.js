@@ -41,7 +41,7 @@ const Layout = ({ meta, children }) => (
                 }
 
                 .navigation {
-                  padding: 1rem ${isMobile ? '0' : '3rem'} 0 0;
+                  padding: ${isMobile ? '0' : '1rem 3rem 0 0'};
                 }
 
                 .lesson {
