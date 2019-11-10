@@ -1,8 +1,8 @@
 import cn from 'classnames';
 
-const Sidebar = ({ active, children, innerRef, fixed }) => {
+export default function Sidebar({ active, children, fixed }) {
   return (
-    <aside className={cn('sidebar', { active, fixed })} ref={innerRef}>
+    <aside className={cn('sidebar', { active, fixed })}>
       {children}
       <style jsx>{`
         .sidebar {
@@ -23,12 +23,7 @@ const Sidebar = ({ active, children, innerRef, fixed }) => {
         }
         @media screen and (max-width: 950px) {
           .sidebar {
-            border-right: 0;
             display: none;
-            left: 0;
-            padding: 40px 24px;
-            right: 0;
-            width: 100%;
           }
           .sidebar.active {
             display: block;
@@ -37,6 +32,4 @@ const Sidebar = ({ active, children, innerRef, fixed }) => {
       `}</style>
     </aside>
   );
-};
-
-export default Sidebar;
+}

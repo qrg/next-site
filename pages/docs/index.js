@@ -10,7 +10,7 @@ import Container from '../../components/container';
 import DocsPage from '../../components/docs/docs-page';
 import SocialMeta from '../../components/social-meta';
 import Footer from '../../components/footer';
-import { Sidebar, Post, Category } from '../../components/sidebar';
+import { Sidebar, SidebarMobile, Post, Category } from '../../components/sidebar';
 
 function removeFromLast(path, key) {
   const i = path.lastIndexOf(key);
@@ -65,6 +65,7 @@ const Docs = ({ routes, html }) => (
   <Page>
     <Header height={64} shadow defaultActive>
       <Navbar />
+      <SidebarMobile />
     </Header>
     <Container>
       <div className="content">

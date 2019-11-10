@@ -212,10 +212,6 @@ export default function Sidebar({ headings, mobile, desktop }) {
         }
       `}</style>
       <style jsx global>{`
-        :global(.target.docs-anchor-target) {
-          margin-top: -208px;
-          padding-top: 208px;
-        }
         // only show in mobile mode
         @media screen and (min-width: 640px) {
           .dropdown-toggle {
