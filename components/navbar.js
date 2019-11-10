@@ -37,92 +37,6 @@ function Navbar({ className, hideLogo, route, isMobile }) {
           Next.js
         </h1>
         <nav className="expand f5">
-          <style jsx>
-            {`
-              nav {
-                position: relative;
-                flex: 1;
-                height: 114px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
-              }
-              nav .links {
-                display: flex;
-                align-items: center;
-                z-index: 1;
-              }
-              nav .dropdown {
-                flex: 1 0 100%;
-                display: flex;
-                margin: 0 -5px;
-                text-align: left;
-                // justify-content: flex-end;
-                // justify-content: space-between;
-                justify-content: space-around;
-              }
-              nav .links a {
-                display: inline-block;
-                // enlarge the clickable area
-                padding: 5px 8px;
-                color: inherit;
-                text-decoration: none;
-              }
-              nav .links a.active {
-                color: #0070f3;
-              }
-              nav .links a.selected {
-                color: #0070f3;
-                font-weight: 600;
-              }
-              nav .logo {
-                font-size: 0;
-                text-align: center;
-                overflow: hidden;
-                transition: all 0.2s ease;
-                visibility: hidden;
-                pointer-events: none;
-                transform: translate3d(0, 30%, 0);
-                opacity: 0;
-              }
-              nav .logo.visible {
-                pointer-events: auto;
-                transform: translate3d(0, 0, 0);
-                visibility: visible;
-                opacity: 1;
-              }
-              nav .logo a {
-                display: inline-block;
-                padding-right: 4px;
-              }
-              nav .links .icons {
-                display: flex;
-                position: relative;
-                align-items: center;
-              }
-              nav .links .icons a {
-                position: relative;
-                padding: 5px;
-                line-height: 1;
-                margin-right: 1rem;
-              }
-              nav .links .icons a .badge {
-                position: absolute;
-                display: inline-block;
-                right: 0px;
-                bottom: 4px;
-                width: 8px;
-                height: 8px;
-                border-radius: 4px;
-                background-color: #2bdb66;
-                pointer-events: none;
-              }
-              nav .links .icons a.no-margin {
-                margin-right: 0;
-              }
-            `}
-          </style>
           <div className={scrollPosition >= LOGO_TOP || !hideLogo ? 'logo visible' : 'logo'}>
             <Link href="/">
               <a aria-label="Next.js">
@@ -206,75 +120,72 @@ function Navbar({ className, hideLogo, route, isMobile }) {
             }
           </div>
         </nav>
-      </Container>
-    );
-  }
 
-  return (
-    <Container className={className} center>
-      <SkipNavLink tabIndex="0" />
-      <h1 className="visually-hidden" aria-hidden="true">
-        Next.js
-      </h1>
-      <nav className="f-reset">
         <style jsx>
           {`
             nav {
               position: relative;
               flex: 1;
-              height: 64px;
+              height: 114px;
               display: flex;
               justify-content: space-between;
               align-items: center;
+              flex-wrap: wrap;
             }
             nav .links {
               display: flex;
               align-items: center;
               z-index: 1;
-              pointer-events: auto;
+            }
+            nav .dropdown {
+              flex: 1 0 100%;
+              display: flex;
+              margin: 0 -5px;
+              text-align: left;
+              justify-content: space-around;
             }
             nav .links a {
               display: inline-block;
               // enlarge the clickable area
-              padding: 5px;
-              margin-left: -5px;
-              margin-right: 2rem;
+              padding: 5px 8px;
+              color: inherit;
               text-decoration: none;
-              transition: color 0.2s ease;
             }
-            nav .links a:hover {
-              color: #111;
+            nav .links a.active {
+              color: #0070f3;
             }
             nav .links a.selected {
               color: #0070f3;
               font-weight: 600;
             }
             nav .logo {
-              width: 100%;
               font-size: 0;
               text-align: center;
               overflow: hidden;
               transition: all 0.2s ease;
               visibility: hidden;
               pointer-events: none;
-              transform: translate3d(-1.5%, 30%, 0);
+              transform: translate3d(0, 30%, 0);
               opacity: 0;
             }
             nav .logo.visible {
               pointer-events: auto;
-              transform: translate3d(-1.5%, 0, 0);
+              transform: translate3d(0, 0, 0);
               visibility: visible;
               opacity: 1;
             }
             nav .logo a {
               display: inline-block;
+              padding-right: 4px;
             }
             nav .links .icons {
               display: flex;
+              position: relative;
               align-items: center;
             }
             nav .links .icons a {
               position: relative;
+              padding: 5px;
               line-height: 1;
               margin-right: 1rem;
             }
@@ -292,14 +203,19 @@ function Navbar({ className, hideLogo, route, isMobile }) {
             nav .links .icons a.no-margin {
               margin-right: 0;
             }
-            // CSS only media query for mobile + SSR
-            @media screen and (max-width: 640px) {
-              .logo {
-                display: none;
-              }
-            }
           `}
         </style>
+      </Container>
+    );
+  }
+
+  return (
+    <Container className={className} center>
+      <SkipNavLink tabIndex="0" />
+      <h1 className="visually-hidden" aria-hidden="true">
+        Next.js
+      </h1>
+      <nav className="f-reset">
         <div className="links">
           <Link href="/#features">
             <a
@@ -391,6 +307,90 @@ function Navbar({ className, hideLogo, route, isMobile }) {
           </div>
         </div>
       </nav>
+
+      <style jsx>
+        {`
+          nav {
+            position: relative;
+            flex: 1;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          nav .links {
+            display: flex;
+            align-items: center;
+            z-index: 1;
+            pointer-events: auto;
+          }
+          nav .links a {
+            display: inline-block;
+            // enlarge the clickable area
+            padding: 5px;
+            margin-left: -5px;
+            margin-right: 2rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+          }
+          nav .links a:hover {
+            color: #111;
+          }
+          nav .links a.selected {
+            color: #0070f3;
+            font-weight: 600;
+          }
+          nav .logo {
+            width: 100%;
+            font-size: 0;
+            text-align: center;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate3d(-1.5%, 30%, 0);
+            opacity: 0;
+          }
+          nav .logo.visible {
+            pointer-events: auto;
+            transform: translate3d(-1.5%, 0, 0);
+            visibility: visible;
+            opacity: 1;
+          }
+          nav .logo a {
+            display: inline-block;
+          }
+          nav .links .icons {
+            display: flex;
+            align-items: center;
+          }
+          nav .links .icons a {
+            position: relative;
+            line-height: 1;
+            margin-right: 1rem;
+          }
+          nav .links .icons a .badge {
+            position: absolute;
+            display: inline-block;
+            right: 0px;
+            bottom: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            background-color: #2bdb66;
+            pointer-events: none;
+          }
+          nav .links .icons a.no-margin {
+            margin-right: 0;
+          }
+          // CSS only media query for mobile + SSR
+          @media screen and (max-width: 640px) {
+            .logo {
+              display: none;
+            }
+          }
+        `}
+      </style>
     </Container>
   );
 }
