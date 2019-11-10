@@ -20,7 +20,7 @@ export default () => {
 
   return (
     <>
-      <Header height={64} shadow defaultActive>
+      <Header shadow>
         <Navbar hideLogo={{ desktop: !isAmp, mobile: true }} />
       </Header>
       <Page title="Next.js - The React Framework">

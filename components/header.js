@@ -2,16 +2,12 @@ import classNames from 'classnames';
 import { useAmp } from 'next/amp';
 
 export default function Header(props) {
-  const { height, shadow, zIndex, background, defaultActive, dotBackground, children } = props;
+  const { shadow, zIndex, background, dotBackground, children } = props;
   const isAmp = useAmp();
 
-  const desktopHeight = height.desktop || Number(height) || 0;
-  const mobileHeight = height.mobile || desktopHeight;
-  const tabletHeight = height.tablet || desktopHeight;
-
-  const desktopShadow = shadow.desktop || (typeof shadow === 'boolean' ? shadow : false);
-  const tabletShadow = shadow.tablet || (typeof shadow === 'boolean' ? shadow : false);
-  const mobileShadow = shadow.mobile || (typeof shadow === 'boolean' ? shadow : false);
+  const desktopShadow = typeof shadow === 'boolean' ? shadow : (shadow && shadow.desktop) || false;
+  const tabletShadow = typeof shadow === 'boolean' ? shadow : (shadow && shadow.tablet) || false;
+  const mobileShadow = typeof shadow === 'boolean' ? shadow : (shadow && shadow.mobile) || false;
 
   return (
     <header>
@@ -25,25 +21,12 @@ export default function Header(props) {
       <style jsx>
         {`
           header {
+            top: 0;
             left: 0;
             width: 100%;
-            height: ${desktopHeight}px;
             ${isAmp ? '' : 'position: -webkit-sticky;'}
             position: sticky;
-            top: ${defaultActive ? 0 : -desktopHeight}px;
             z-index: ${zIndex || 1000};
-          }
-          @media screen and (max-width: 960px) {
-            header {
-              height: ${tabletHeight}px;
-              top: ${defaultActive ? 0 : -tabletHeight}px;
-            }
-          }
-          @media screen and (max-width: 640px) {
-            header {
-              height: ${mobileHeight}px;
-              top: ${defaultActive ? 0 : -mobileHeight}px;
-            }
           }
           .fixed-container {
             position: relative;
