@@ -243,6 +243,7 @@ function Navbar({ className, hideLogo, route, isMobile }) {
               selected: route.startsWith('/docs')
             })}
             title="Documentation"
+            style={{ marginRight: 0 }}
           >
             Docs
           </a>
