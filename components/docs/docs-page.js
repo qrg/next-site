@@ -9,6 +9,11 @@ export default memo(function DocsPage({ html }) {
         .docs {
           max-width: calc(100% - 300px); /* Exclude size of the navbar */
         }
+        @media screen and (max-width: 950px) {
+          .docs {
+            max-width: 100%;
+          }
+        }
       `}</style>
       <style jsx global>{`
          {
@@ -147,6 +152,9 @@ export default memo(function DocsPage({ html }) {
         .docs hr {
           border: 0;
           border-top: 1px solid #f3f3f3;
+        }
+        .docs ul li {
+          margin-bottom: 0.5rem;
         }
       `}</style>
     </>
