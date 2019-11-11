@@ -140,7 +140,7 @@ export default function Sidebar({ headings, mobile, desktop }) {
             offset={64 + 32}
             height={{
               desktop: 0,
-              mobile: 96
+              mobile: 114
             }}
           >
             <Navbar />

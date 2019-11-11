@@ -7,7 +7,9 @@ import ArrowRightSidebar from '../icons/arrow-right-sidebar';
 export default function SidebarMobile({ children }) {
   const router = useRouter();
   const [opened, setOpen] = useState(false);
-  const toggleOpen = () => setOpen(!opened);
+  const toggleOpen = () => {
+    setOpen(!opened);
+  };
 
   useEffect(() => {
     if (opened) setOpen(false);
@@ -36,7 +38,7 @@ export default function SidebarMobile({ children }) {
         }
         .dropdown-toggle {
           width: 100%;
-          display: block;
+          display: none;
         }
         .docs-select {
           height: 3rem;
@@ -73,9 +75,9 @@ export default function SidebarMobile({ children }) {
         .opened > .docs-select :global(svg) {
           transform: rotate(90deg);
         }
-        @media screen and (min-width: 950px) {
+        @media screen and (max-width: 950px) {
           .dropdown-toggle {
-            display: none;
+            display: block;
           }
         }
       `}</style>

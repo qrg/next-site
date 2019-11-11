@@ -63,9 +63,11 @@ function findRouteByPath(path, routes) {
 
 const Docs = ({ routes, html }) => (
   <Page>
-    <Header height={64} shadow defaultActive>
+    <Header height={{ desktop: 64, mobile: 114 }} shadow defaultActive>
       <Navbar />
-      <SidebarMobile />
+      <SidebarMobile>
+        <SidebarRoutes routes={routes} />
+      </SidebarMobile>
     </Header>
     <Container>
       <div className="content">

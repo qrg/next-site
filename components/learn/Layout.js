@@ -17,7 +17,7 @@ const Layout = ({ meta, children }) => (
       {({ isMobile }) => {
         return (
           <>
-            <Header height={64 + (isMobile ? 32 : 0)} shadow defaultActive>
+            <Header height={{ desktop: 64, mobile: 114 }} shadow>
               <Navbar />
             </Header>
             <Container wide={isMobile}>
