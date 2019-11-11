@@ -41,8 +41,6 @@ export default function Category({ level = 1, title, selected, children }) {
           transform: rotate(90deg);
         }
         .level-2 .label {
-          font-size: 1rem;
-          line-height: 1.5rem;
           text-transform: none;
           letter-spacing: 0;
         }

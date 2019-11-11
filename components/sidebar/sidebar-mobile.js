@@ -1,17 +1,34 @@
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import cn from 'classnames';
 import Container from '../container';
 import ArrowRightSidebar from '../icons/arrow-right-sidebar';
 
-export default function SidebarMobile() {
+export default function SidebarMobile({ children }) {
+  const router = useRouter();
+  const [opened, setOpen] = useState(false);
+  const toggleOpen = () => setOpen(!opened);
+
+  useEffect(() => {
+    if (opened) setOpen(false);
+  }, [router.asPath]);
+
   return (
-    <label htmlFor="dropdown-input" className="dropdown-toggle">
-      <input id="dropdown-input" type="checkbox" />
-      <div className="docs-select">
+    <>
+      <label htmlFor="dropdown-input" className={cn('dropdown-toggle', { opened })}>
+        <input id="dropdown-input" type="checkbox" checked={opened} onChange={toggleOpen} />
+        <div className="docs-select">
+          <Container>
+            <ArrowRightSidebar fill="#999" />
+            Menu
+          </Container>
+        </div>
+      </label>
+      <div className="docs-dropdown">
         <Container>
-          <ArrowRightSidebar fill="#999" />
-          Menu
+          <nav>{children}</nav>
         </Container>
       </div>
-      <div className="documentation__sidebar docs-dropdown" />
 
       <style jsx>{`
         #dropdown-input {
@@ -41,18 +58,20 @@ export default function SidebarMobile() {
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
         }
-        #dropdown-input:checked ~ .docs-dropdown {
-          bottom: -50vh;
+        .docs-dropdown nav {
+          border-left: 1px solid #eaeaea;
+          padding: 10px 19px;
+        }
+        .opened ~ .docs-dropdown {
+          bottom: -60vh;
+          border-top: 1px solid #eaeaea;
         }
         .docs-select :global(svg) {
           margin-right: 14px;
           transition: transform 0.15s ease;
         }
-        #dropdown-input:checked ~ .docs-select :global(svg) {
+        .opened > .docs-select :global(svg) {
           transform: rotate(90deg);
-        }
-        .documentation__sidebar nav {
-          padding-left: 28px;
         }
         @media screen and (min-width: 950px) {
           .dropdown-toggle {
@@ -60,6 +79,6 @@ export default function SidebarMobile() {
           }
         }
       `}</style>
-    </label>
+    </>
   );
 }
