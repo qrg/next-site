@@ -18,13 +18,6 @@ function Page({ title, description, children }) {
           content={description || 'Next.js is the React framework for production'}
         />
       </Head>
-      <style jsx>
-        {`
-           {
-            overflow-x: hidden;
-          }
-        `}
-      </style>
       <style jsx global>
         {`
           html {
