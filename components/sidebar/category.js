@@ -24,9 +24,9 @@ export default function Category({ level = 1, title, selected, children }) {
           align-items: center;
           color: #444444;
         }
-        .label :global(svg) {
+        .label > :global(svg) {
           margin-right: 14px;
-          transition: all 0.15s ease;
+          transition: transform 0.15s ease;
         }
         .selected > .label {
           font-weight: 600;
@@ -35,7 +35,7 @@ export default function Category({ level = 1, title, selected, children }) {
         .open > .label {
           color: #000;
         }
-        .open > .label :global(svg) {
+        .open > .label > :global(svg) {
           margin-left: 1px;
           margin-right: 13px;
           transform: rotate(90deg);
