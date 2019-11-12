@@ -1,10 +1,22 @@
 import { memo } from 'react';
+import { GITHUB_URL, REPO_NAME, REPO_BRANCH } from '../../lib/github-constants';
 
-export default memo(function DocsPage({ html }) {
+function areEqual(prevProps, props) {
+  return prevProps.path === props.path;
+}
+
+function DocsPage({ path, html }) {
+  const editUrl = `${GITHUB_URL}/${REPO_NAME}/edit/${REPO_BRANCH}${path}`;
+
   return (
-    <>
+    <div className="docs">
       {/* eslint-disable-next-line */}
-      <div className="docs" dangerouslySetInnerHTML={{ __html: html }} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <footer>
+        <a href={editUrl} target="_blank">
+          Edit this page on GitHub
+        </a>
+      </footer>
       <style jsx>{`
         .docs {
           max-width: calc(100% - 300px); /* Exclude size of the navbar */
@@ -13,6 +25,14 @@ export default memo(function DocsPage({ html }) {
           .docs {
             max-width: 100%;
           }
+        }
+        footer {
+          display: flex;
+          font-size: 0.875rem;
+          justify-content: flex-end;
+          border-top: 1px solid #f3f3f3;
+          margin-top: 2.5rem;
+          padding: 1.5rem 0;
         }
       `}</style>
       <style jsx global>{`
@@ -157,6 +177,8 @@ export default memo(function DocsPage({ html }) {
           margin-bottom: 0.5rem;
         }
       `}</style>
-    </>
+    </div>
   );
-});
+}
+
+export default memo(DocsPage, areEqual);

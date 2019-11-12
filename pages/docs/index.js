@@ -61,7 +61,7 @@ function findRouteByPath(path, routes) {
   }
 }
 
-const Docs = ({ routes, html }) => (
+const Docs = ({ routes, route, html }) => (
   <Page>
     <Header height={{ desktop: 64, mobile: 114 }} shadow defaultActive>
       <Navbar />
@@ -74,7 +74,7 @@ const Docs = ({ routes, html }) => (
         <Sidebar>
           <SidebarRoutes routes={routes} />
         </Sidebar>
-        <DocsPage html={html} />
+        <DocsPage path={route.path} html={html} />
       </div>
       <style jsx>{`
         .content {
@@ -122,7 +122,7 @@ Docs.getInitialProps = async ({ res, query }) => {
 
   if (res) res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
 
-  return { routes: manifest.routes, html };
+  return { routes: manifest.routes, route, html };
 };
 
 export default Docs;
