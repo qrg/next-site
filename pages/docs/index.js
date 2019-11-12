@@ -4,6 +4,7 @@ import fetchDocsManifest from '../../lib/fetch-docs-manifest';
 import markdownToHtml from '../../lib/markdown-to-html';
 import { getRawFileFromRepo } from '../../lib/github';
 import Page from '../../components/page';
+import PageContent from '../../components/page-content';
 import Header from '../../components/header';
 import Navbar from '../../components/navbar';
 import Container from '../../components/container';
@@ -63,33 +64,35 @@ function findRouteByPath(path, routes) {
 
 const Docs = ({ routes, route, html }) => (
   <Page>
-    <Header height={{ desktop: 64, mobile: 114 }} shadow defaultActive>
-      <Navbar />
-      <SidebarMobile>
-        <SidebarRoutes routes={routes} />
-      </SidebarMobile>
-    </Header>
-    <Container>
-      <div className="content">
-        <Sidebar>
+    <PageContent>
+      <Header height={{ desktop: 64, mobile: 114 }} shadow defaultActive>
+        <Navbar />
+        <SidebarMobile>
           <SidebarRoutes routes={routes} />
-        </Sidebar>
-        <DocsPage path={route.path} html={html} />
-      </div>
-      <style jsx>{`
-        .content {
-          display: flex;
-          margin-top: 2rem;
-          margin-bottom: 5rem;
-        }
-      `}</style>
-    </Container>
-    <SocialMeta
-      image="/static/twitter-cards/learn.png"
-      title="Learn | Next.js"
-      url="https://nextjs.org/learn"
-      description="Production grade React applications that scale. The world’s leading companies use Next.js to build server-rendered applications, static websites, and more."
-    />
+        </SidebarMobile>
+      </Header>
+      <Container>
+        <div className="content">
+          <Sidebar>
+            <SidebarRoutes routes={routes} />
+          </Sidebar>
+          <DocsPage path={route.path} html={html} />
+        </div>
+        <style jsx>{`
+          .content {
+            display: flex;
+            margin-top: 2rem;
+            margin-bottom: 5rem;
+          }
+        `}</style>
+      </Container>
+      <SocialMeta
+        image="/static/twitter-cards/learn.png"
+        title="Learn | Next.js"
+        url="https://nextjs.org/learn"
+        description="Production grade React applications that scale. The world’s leading companies use Next.js to build server-rendered applications, static websites, and more."
+      />
+    </PageContent>
     <SkipNavContent />
     <Footer />
   </Page>
