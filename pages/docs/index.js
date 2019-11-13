@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { SkipNavContent } from '@reach/skip-nav';
 import fetchDocsManifest from '../../lib/fetch-docs-manifest';
@@ -62,41 +63,60 @@ function findRouteByPath(path, routes) {
   }
 }
 
-const Docs = ({ routes, route, html }) => (
-  <Page>
-    <PageContent>
-      <Header height={{ desktop: 64, mobile: 114 }} shadow defaultActive>
-        <Navbar />
-        <SidebarMobile>
-          <SidebarRoutes routes={routes} />
-        </SidebarMobile>
-      </Header>
-      <Container>
-        <div className="content">
-          <Sidebar>
+// These hashes don't need to be redirected to the olds docs because they are covered
+// by the first page of the new docs
+const excludedHashes = ['how-to-use', 'quick-start', 'manual-setup'];
+
+const Docs = ({ routes, route, html }) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.asPath.startsWith('/docs#')) {
+      const hash = router.asPath.split('#')[1];
+
+      if (!excludedHashes.includes(hash)) {
+        // Redirect the user to the old docs
+        router.push(`/docs/old#${hash}`);
+      }
+    }
+  }, [router.asPath]);
+
+  return (
+    <Page>
+      <PageContent>
+        <Header height={{ desktop: 64, mobile: 114 }} shadow defaultActive>
+          <Navbar />
+          <SidebarMobile>
             <SidebarRoutes routes={routes} />
-          </Sidebar>
-          <DocsPage path={route.path} html={html} />
-        </div>
-        <style jsx>{`
-          .content {
-            display: flex;
-            margin-top: 2rem;
-            margin-bottom: 5rem;
-          }
-        `}</style>
-      </Container>
-      <SocialMeta
-        image="/static/twitter-cards/learn.png"
-        title="Learn | Next.js"
-        url="https://nextjs.org/learn"
-        description="Production grade React applications that scale. The world’s leading companies use Next.js to build server-rendered applications, static websites, and more."
-      />
-    </PageContent>
-    <SkipNavContent />
-    <Footer />
-  </Page>
-);
+          </SidebarMobile>
+        </Header>
+        <Container>
+          <div className="content">
+            <Sidebar>
+              <SidebarRoutes routes={routes} />
+            </Sidebar>
+            <DocsPage path={route.path} html={html} />
+          </div>
+          <style jsx>{`
+            .content {
+              display: flex;
+              margin-top: 2rem;
+              margin-bottom: 5rem;
+            }
+          `}</style>
+        </Container>
+        <SocialMeta
+          image="/static/twitter-cards/learn.png"
+          title="Learn | Next.js"
+          url="https://nextjs.org/learn"
+          description="Production grade React applications that scale. The world’s leading companies use Next.js to build server-rendered applications, static websites, and more."
+        />
+      </PageContent>
+      <SkipNavContent />
+      <Footer />
+    </Page>
+  );
+};
 
 // export async function unstable_getStaticParams() {
 //   // const { routes } = await fetchDocsManifest();
