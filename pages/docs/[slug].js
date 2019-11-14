@@ -56,7 +56,7 @@ const Docs = ({ routes, route, html }) => {
 
       if (!excludedHashes.includes(hash)) {
         // Redirect the user to the old docs
-        router.push(`/docs/old#${hash}`);
+        router.push(`/old-docs#${hash}`);
       }
     }
   }, [asPath]);
