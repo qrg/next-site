@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { SkipNavContent } from '@reach/skip-nav';
 import { getSlug, removeFromLast } from '../../lib/docs/utils';
-import getDocsPageProps from '../../lib/docs/get-docs-page-props';
 import Page from '../../components/page';
 import PageContent from '../../components/page-content';
 import Header from '../../components/header';
@@ -99,10 +98,10 @@ const Docs = ({ routes, route, html }) => {
 };
 
 export async function unstable_getStaticProps({ params }) {
-  return {
-    props: await getDocsPageProps(params),
-    revalidate: 60
-  };
+  const docsPage = await import('../../lib/docs/page');
+  const props = await docsPage.getStaticProps(params);
+
+  return { props, revalidate: 60 };
 }
 
 export default Docs;
