@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Error from 'next/error';
 import { SkipNavContent } from '@reach/skip-nav';
 import { getSlug, removeFromLast } from '../../lib/docs/utils';
 import Page from '../../components/page';
@@ -46,6 +47,10 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
 const excludedHashes = ['how-to-use', 'quick-start', 'manual-setup'];
 
 const Docs = ({ routes, route, html }) => {
+  if (!route) {
+    return <Error statusCode={404} />;
+  }
+
   const router = useRouter();
   const { asPath } = router;
   const title = `Documentation - ${route.title} | ${process.env.SITE_NAME}`;
