@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { SkipNavContent } from '@reach/skip-nav';
-import fetchDocsManifest from '../../lib/fetch-docs-manifest';
-import markdownToHtml from '../../lib/markdown-to-html';
-import { getRawFileFromRepo } from '../../lib/github';
+import { getSlug, removeFromLast } from '../../lib/docs/utils';
+import getDocsPageProps from '../../lib/docs/get-docs-page-props';
 import Page from '../../components/page';
 import PageContent from '../../components/page-content';
 import Header from '../../components/header';
@@ -13,15 +12,6 @@ import DocsPage from '../../components/docs/docs-page';
 import SocialMeta from '../../components/social-meta';
 import Footer from '../../components/footer';
 import { Sidebar, SidebarMobile, Post, Category } from '../../components/sidebar';
-
-function removeFromLast(path, key) {
-  const i = path.lastIndexOf(key);
-  return i === -1 ? path : path.substring(0, i);
-}
-
-function getSlug(query) {
-  return query.slug ? `/docs${query.slug}` : '/docs/getting-started';
-}
 
 function getCategoryPath(routes) {
   const route = routes.find(r => r.path);
@@ -50,17 +40,6 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
 
     return <Post key={title} level={level} route={{ href, path, title, pathname, selected }} />;
   });
-}
-
-function findRouteByPath(path, routes) {
-  // eslint-disable-next-line
-  for (const route of routes) {
-    if (route.path && removeFromLast(route.path, '.') === path) {
-      return route;
-    }
-    const childPath = route.routes && findRouteByPath(path, route.routes);
-    if (childPath) return childPath;
-  }
 }
 
 // These hashes don't need to be redirected to the olds docs because they are covered
@@ -119,37 +98,11 @@ const Docs = ({ routes, route, html }) => {
   );
 };
 
-// export async function unstable_getStaticParams() {
-//   // const { routes } = await fetchDocsManifest();
-//   return ['/docs/getting-started', { slug: '/docs/getting-started' }];
-// }
-
 export async function unstable_getStaticProps({ params }) {
-  const slug = getSlug(params);
-  const manifest = await fetchDocsManifest();
-  const route = findRouteByPath(slug, manifest.routes);
-  const md = await getRawFileFromRepo(route.path);
-  const html = await markdownToHtml(route.path, md);
-
   return {
-    props: { routes: manifest.routes, route, html },
+    props: await getDocsPageProps(params),
     revalidate: 60
   };
 }
-
-// NOTE: temporal code until iSSG is properly implemented for the page
-// Docs.getInitialProps = async ({ res, query }) => {
-//   console.log('query', query);
-
-//   const slug = getSlug(query);
-//   const manifest = await fetchDocsManifest();
-//   const route = findRouteByPath(slug, manifest.routes);
-//   const md = await getRawFileFromRepo(route.path);
-//   const html = await markdownToHtml(route.path, md);
-
-//   if (res) res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
-
-//   return { routes: manifest.routes, route, html };
-// };
 
 export default Docs;
