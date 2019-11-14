@@ -69,20 +69,22 @@ const excludedHashes = ['how-to-use', 'quick-start', 'manual-setup'];
 
 const Docs = ({ routes, route, html }) => {
   const router = useRouter();
+  const { asPath } = router;
+  const title = `Documentation - ${route.title} | ${process.env.SITE_NAME}`;
 
   useEffect(() => {
-    if (router.asPath.startsWith('/docs#')) {
-      const hash = router.asPath.split('#')[1];
+    if (asPath.startsWith('/docs#')) {
+      const hash = asPath.split('#')[1];
 
       if (!excludedHashes.includes(hash)) {
         // Redirect the user to the old docs
         router.push(`/docs/old#${hash}`);
       }
     }
-  }, [router.asPath]);
+  }, [asPath]);
 
   return (
-    <Page>
+    <Page title={title}>
       <PageContent>
         <Header height={{ desktop: 64, mobile: 114 }} shadow defaultActive>
           <Navbar />
@@ -106,9 +108,8 @@ const Docs = ({ routes, route, html }) => {
           `}</style>
         </Container>
         <SocialMeta
-          image="/static/twitter-cards/learn.png"
-          title="Learn | Next.js"
-          url="https://nextjs.org/learn"
+          title={title}
+          url={`https://nextjs.org${asPath}`}
           description="Production grade React applications that scale. The world’s leading companies use Next.js to build server-rendered applications, static websites, and more."
         />
       </PageContent>
