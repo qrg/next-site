@@ -20,7 +20,7 @@ function removeFromLast(path, key) {
 }
 
 function getSlug(query) {
-  return query.slug === '/docs' ? '/docs/getting-started' : query.slug;
+  return query.slug ? `/docs${query.slug}` : '/docs/getting-started';
 }
 
 function getCategoryPath(routes) {
@@ -84,7 +84,7 @@ const Docs = ({ routes, route, html }) => {
   }, [asPath]);
 
   return (
-    <Page title={title}>
+    <Page>
       <PageContent>
         <Header height={{ desktop: 64, mobile: 114 }} shadow defaultActive>
           <Navbar />
@@ -124,29 +124,32 @@ const Docs = ({ routes, route, html }) => {
 //   return ['/docs/getting-started', { slug: '/docs/getting-started' }];
 // }
 
-// export async function unstable_getStaticProps({ params } {
-//   const { routes } = await fetchDocsManifest();
-//   const route = findRouteByPath(params.slug, routes);
-//   const md = await getRawFileFromRepo(route.path);
-//   const html = await markdownToHtml(md);
-
-//   return {
-//     props: { routes, html },
-//     revalidate: 1
-//   };
-// }
-
-// NOTE: temporal code until iSSG is properly implemented for the page
-Docs.getInitialProps = async ({ res, query }) => {
-  const slug = getSlug(query);
+export async function unstable_getStaticProps({ params }) {
+  const slug = getSlug(params);
   const manifest = await fetchDocsManifest();
   const route = findRouteByPath(slug, manifest.routes);
   const md = await getRawFileFromRepo(route.path);
   const html = await markdownToHtml(route.path, md);
 
-  if (res) res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
+  return {
+    props: { routes: manifest.routes, route, html },
+    revalidate: 60
+  };
+}
 
-  return { routes: manifest.routes, route, html };
-};
+// NOTE: temporal code until iSSG is properly implemented for the page
+// Docs.getInitialProps = async ({ res, query }) => {
+//   console.log('query', query);
+
+//   const slug = getSlug(query);
+//   const manifest = await fetchDocsManifest();
+//   const route = findRouteByPath(slug, manifest.routes);
+//   const md = await getRawFileFromRepo(route.path);
+//   const html = await markdownToHtml(route.path, md);
+
+//   if (res) res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
+
+//   return { routes: manifest.routes, route, html };
+// };
 
 export default Docs;

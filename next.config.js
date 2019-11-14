@@ -41,7 +41,15 @@ const BACKEND_URL = 'https://next-site-git-new-docs.zeit.now.sh';
 const nextConfig = {
   pageExtensions: ['jsx', 'js', 'ts', 'tsx', 'mdx'],
   experimental: {
-    granularChunks: true
+    granularChunks: true,
+    async rewrites() {
+      return [
+        {
+          source: '/docs:slug(.*)',
+          destination: '/docs/[slug]'
+        }
+      ];
+    }
   },
   env: {
     BACKEND_URL,

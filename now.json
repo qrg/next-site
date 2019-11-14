@@ -49,10 +49,6 @@
     {
       "src": "/feed.xml",
       "dest": "/_next/static/feed.xml"
-    },
-    {
-      "src": "/docs(?!/old)(.*)",
-      "dest": "/docs?slug=/docs$1"
     }
   ]
 }
