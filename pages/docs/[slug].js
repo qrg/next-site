@@ -44,8 +44,8 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
       );
     }
 
+    const href = '/docs/[slug]';
     const pathname = removeFromLast(path, '.');
-    const href = `/docs?slug=${pathname}`;
     const selected = slug === '/docs' ? false : slug.startsWith(pathname);
 
     return <Post key={title} level={level} route={{ href, path, title, pathname, selected }} />;
