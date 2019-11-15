@@ -42,11 +42,12 @@ const nextConfig = {
   pageExtensions: ['jsx', 'js', 'ts', 'tsx', 'mdx'],
   experimental: {
     granularChunks: true,
+    catchAllRouting: true,
     async rewrites() {
       return [
         {
-          source: '/docs:slug(.*)',
-          destination: '/docs/[slug]'
+          source: '/docs',
+          destination: '/docs/[...slug]'
         }
       ];
     }
