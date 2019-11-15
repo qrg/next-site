@@ -2,9 +2,9 @@ import { useState } from 'react';
 import cn from 'classnames';
 import ArrowRightSidebar from '../icons/arrow-right-sidebar';
 
-export default function Category({ level = 1, title, selected, children }) {
+export default function Category({ level = 1, title, selected, opened, children }) {
   const levelClass = `level-${level}`;
-  const [toggle, setToggle] = useState(selected);
+  const [toggle, setToggle] = useState(selected || opened);
   const toggleCategory = () => setToggle(!toggle);
 
   return (

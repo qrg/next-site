@@ -12,12 +12,18 @@ import DocsPage from '../../components/docs/docs-page';
 import SocialMeta from '../../components/social-meta';
 import { Sidebar, SidebarMobile, Post, Category } from '../../components/sidebar';
 
+// These hashes don't need to be redirected to the olds docs because they are covered
+// by the first page of the new docs
+const excludedHashes = ['how-to-use', 'quick-start', 'manual-setup'];
+// This sections will always start opened
+const defaultOpened = ['basic-features', 'pages'];
+
 function getCategoryPath(routes) {
   const route = routes.find(r => r.path);
   return route && removeFromLast(route.path, '/');
 }
 
-function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
+function SidebarRoutes({ isMobile, routes: currentRoutes, level = 1 }) {
   const { query } = useRouter();
   const slug = getSlug(query);
 
@@ -25,10 +31,12 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
     if (routes) {
       const pathname = getCategoryPath(routes);
       const selected = slug.startsWith(pathname);
+      const opened =
+        selected || isMobile ? false : defaultOpened.includes(pathname.replace('/docs/', ''));
 
       return (
-        <Category key={pathname} level={level} title={title} selected={selected}>
-          <SidebarRoutes routes={routes} level={level + 1} />
+        <Category key={pathname} level={level} title={title} selected={selected} opened={opened}>
+          <SidebarRoutes isMobile={isMobile} routes={routes} level={level + 1} />
         </Category>
       );
     }
@@ -40,10 +48,6 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
     return <Post key={title} level={level} route={{ href, path, title, pathname, selected }} />;
   });
 }
-
-// These hashes don't need to be redirected to the olds docs because they are covered
-// by the first page of the new docs
-const excludedHashes = ['how-to-use', 'quick-start', 'manual-setup'];
 
 const Docs = ({ routes, route, html }) => {
   if (!route) {
@@ -71,7 +75,7 @@ const Docs = ({ routes, route, html }) => {
         <Header height={{ desktop: 64, mobile: 114 }} shadow defaultActive>
           <Navbar />
           <SidebarMobile>
-            <SidebarRoutes routes={routes} />
+            <SidebarRoutes isMobile routes={routes} />
           </SidebarMobile>
         </Header>
         <Container>
