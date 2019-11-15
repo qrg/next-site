@@ -11,6 +11,7 @@ export default function SidebarMobile({ children }) {
     setOpen(!opened);
   };
 
+  // Close the menu after a page navigation
   useEffect(() => {
     if (opened) setOpen(false);
   }, [router.asPath]);
@@ -49,6 +50,7 @@ export default function SidebarMobile({ children }) {
           cursor: pointer;
         }
         .docs-dropdown {
+          display: none;
           position: absolute;
           left: 0;
           right: 0;
@@ -76,7 +78,8 @@ export default function SidebarMobile({ children }) {
           transform: rotate(90deg);
         }
         @media screen and (max-width: 950px) {
-          .dropdown-toggle {
+          .dropdown-toggle,
+          .docs-dropdown {
             display: block;
           }
         }
