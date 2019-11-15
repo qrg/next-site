@@ -10,7 +10,6 @@ import Navbar from '../../components/navbar';
 import Container from '../../components/container';
 import DocsPage from '../../components/docs/docs-page';
 import SocialMeta from '../../components/social-meta';
-import Footer from '../../components/footer';
 import { Sidebar, SidebarMobile, Post, Category } from '../../components/sidebar';
 
 function getCategoryPath(routes) {
@@ -77,7 +76,7 @@ const Docs = ({ routes, route, html }) => {
         </Header>
         <Container>
           <div className="content">
-            <Sidebar>
+            <Sidebar fixed>
               <SidebarRoutes routes={routes} />
             </Sidebar>
             <DocsPage path={route.path} html={html} />
@@ -97,7 +96,6 @@ const Docs = ({ routes, route, html }) => {
         />
       </PageContent>
       <SkipNavContent />
-      <Footer />
     </Page>
   );
 };

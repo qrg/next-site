@@ -19,11 +19,13 @@ function DocsPage({ path, html }) {
       </footer>
       <style jsx>{`
         .docs {
-          max-width: calc(100% - 300px); /* Exclude size of the navbar */
+          max-width: calc(100% - 300px); /* Exclude size of the sidebar */
+          margin-left: calc(300px + 1rem); /* Fixed sidebar width + margin */
         }
         @media screen and (max-width: 950px) {
           .docs {
             max-width: 100%;
+            margin: 0;
           }
         }
         footer {
