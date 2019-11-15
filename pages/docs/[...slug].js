@@ -34,7 +34,7 @@ function SidebarRoutes({ routes: currentRoutes, level = 1 }) {
       );
     }
 
-    const href = '/docs/[slug]';
+    const href = '/docs/[...slug]';
     const pathname = removeFromLast(path, '.');
     const selected = slug === '/docs' ? false : slug.startsWith(pathname);
 

@@ -1,7 +1,8 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
 
-function NavLink({ route: { pathname, title, selected }, onClick }) {
+function NavLink({ route: { href, pathname, title, selected }, onClick }) {
   const router = useRouter();
   const onlyHashChange = pathname === router.pathname;
 
@@ -13,9 +14,9 @@ function NavLink({ route: { pathname, title, selected }, onClick }) {
           {title}
         </a>
       ) : (
-        <a href={pathname} onClick={onClick}>
-          {title}
-        </a>
+        <Link href={href} as={pathname}>
+          <a onClick={onClick}>{title}</a>
+        </Link>
       )}
       <style jsx>{`
         div.selected {
