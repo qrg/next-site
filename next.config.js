@@ -47,7 +47,7 @@ const nextConfig = {
       return [
         {
           source: '/docs',
-          destination: '/docs/[...slug]'
+          destination: '/docs/index'
         }
       ];
     }
