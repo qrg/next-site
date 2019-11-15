@@ -13,7 +13,7 @@ function DocsPage({ path, html }) {
       {/* eslint-disable-next-line */}
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <footer>
-        <a href={editUrl} target="_blank">
+        <a href={editUrl} target="_blank" rel="noopener noreferrer">
           Edit this page on GitHub
         </a>
       </footer>
