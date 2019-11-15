@@ -102,6 +102,11 @@ const Docs = ({ routes, route, html }) => {
   );
 };
 
+export async function unstable_getStaticParams() {
+  const docsPage = await import('../../lib/docs/page');
+  return docsPage.getStaticParams();
+}
+
 export async function unstable_getStaticProps({ params }) {
   const docsPage = await import('../../lib/docs/page');
   const props = await docsPage.getStaticProps(params);
