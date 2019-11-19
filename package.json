@@ -15,6 +15,7 @@
     "start": "next start",
     "build": "next build && yarn build:rss",
     "build:rss": "node ./.next/serverless/scripts/build-rss.js",
+    "index-docs": "node ./.next/serverless/scripts/index-docs.js",
     "lint": "eslint"
   },
   "husky": {
@@ -32,6 +33,7 @@
     "@reach/skip-nav": "0.1.2",
     "@zeit/fetch": "5.1.1",
     "airtable": "0.7.2",
+    "algoliasearch": "3.35.1",
     "classnames": "^2.2.6",
     "cookie": "0.4.0",
     "date-fns": "^1.29.0",
@@ -43,6 +45,8 @@
     "js-cookie": "2.2.0",
     "jsonwebtoken": "8.5.1",
     "jwt-decode": "2.2.0",
+    "md5": "2.2.1",
+    "mdast-util-to-string": "1.0.7",
     "next": "9.1.4-canary.5",
     "node-fetch": "2.6.0",
     "nprogress": "0.2.0",
