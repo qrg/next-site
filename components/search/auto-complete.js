@@ -8,16 +8,16 @@ function AutoComplete({ hits, refine }) {
   const inputProps = {
     value: inputValue,
     type: 'search',
+    placeholder: 'Search...',
     onChange: (e, { newValue }) => {
       setValue(newValue);
     }
   };
 
   return (
-    <span className="input-container">
-      <span className="search__search-placeholder">
+    <div className="input-container">
+      <span className="icon">
         <SearchIcon />
-        <span>Search...</span>
       </span>
 
       <AutoSuggest
@@ -28,7 +28,31 @@ function AutoComplete({ hits, refine }) {
         getSuggestionValue={() => inputValue}
         highlightFirstSuggestion
       />
-    </span>
+
+      <style jsx>{`
+        .input-container {
+          position: relative;
+          height: 2rem;
+          display: inline-flex;
+          align-items: center;
+          transition: border 0.2s ease, color 0.2s ease;
+          border-radius: 5px;
+          border: 1px solid #333333;
+        }
+        .icon {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          padding: 0 0.5rem;
+        }
+        .input-container :global(.react-autosuggest__input) {
+          border: none;
+          outline: 0;
+          height: 100%;
+          font-size: 0.875rem;
+        }
+      `}</style>
+    </div>
   );
 }
 
