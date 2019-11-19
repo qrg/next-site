@@ -39,6 +39,7 @@ const BACKEND_URL = 'https://next-site-git-new-docs.zeit.now.sh';
 // const BACKEND_URL = process.env.BACKEND_URL || 'https://nextjs.org';
 
 const nextConfig = {
+  target: 'serverless', // Not required for Now, but used by GitHub Actions
   pageExtensions: ['jsx', 'js', 'ts', 'tsx', 'mdx'],
   experimental: {
     granularChunks: true,
