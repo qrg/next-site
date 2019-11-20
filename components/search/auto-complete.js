@@ -10,7 +10,7 @@ function renderSuggestion(hit) {
   return <Suggestion hit={hit} />;
 }
 
-function AutoComplete({ hits, refine }) {
+function AutoComplete({ hits, refine, onSearchStart, onSearchClear }) {
   const [inputValue, setValue] = useState('');
   const [hasFocus, setFocus] = useState(false);
   const onFocus = () => {
@@ -37,8 +37,14 @@ function AutoComplete({ hits, refine }) {
         inputProps={inputProps}
         suggestions={hits}
         renderSuggestion={renderSuggestion}
-        onSuggestionsFetchRequested={({ value }) => refine(value)}
-        onSuggestionsClearRequested={() => refine()}
+        onSuggestionsFetchRequested={({ value }) => {
+          if (onSearchStart) onSearchStart();
+          refine(value);
+        }}
+        onSuggestionsClearRequested={() => {
+          if (onSearchClear) onSearchClear();
+          refine();
+        }}
         getSuggestionValue={() => inputValue}
         highlightFirstSuggestion
       />

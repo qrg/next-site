@@ -1,14 +1,14 @@
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
-import algoliasearch from 'algoliasearch/lite';
+import AlgoliaClient from '../../lib/algolia-client';
 import AutoComplete from './auto-complete';
 
-const searchClient = algoliasearch('NNTAHQI9C5', 'ac5d89f9877f9fb09dbdc9a010cca761');
+const searchClient = new AlgoliaClient();
 
-export default function Search() {
+export default function Search(props) {
   return (
     <InstantSearch indexName="nextjs_docs" searchClient={searchClient}>
       <Configure hitsPerPage={8} />
-      <AutoComplete />
+      <AutoComplete {...props} />
     </InstantSearch>
   );
 }

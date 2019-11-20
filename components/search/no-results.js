@@ -1,7 +1,10 @@
 import { connectStateResults } from 'react-instantsearch-dom';
 
-const NoResults = ({ searchResults, searching }) =>
-  !searching && (searchResults && searchResults.nbHits === 0) ? (
+const NoResults = ({ searchState, searchResults, searching }) =>
+  searchState &&
+  searchState.query &&
+  !searching &&
+  (searchResults && searchResults.nbHits === 0) ? (
     <div className="no-results">
       No results for <span>&quot;{searchResults.query}&quot;</span>.<br /> Try again with a
       different keyword.
