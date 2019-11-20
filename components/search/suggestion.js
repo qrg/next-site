@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { Highlight, Snippet } from 'react-instantsearch-dom';
 
 export default function Suggestion({ hit }) {
-  // const hash =
+  const hash = hit.anchor ? `#${hit.anchor}` : '';
+  const pathname = hit.path + hash;
 
   return (
-    <Link href="/docs/[...slug]" as={hit.path}>
+    <Link href="/docs/[...slug]" as={pathname}>
       <a>
         <span className="suggestion__title">
           <Highlight hit={hit} attribute="title" tagName="mark" />
@@ -13,6 +14,12 @@ export default function Suggestion({ hit }) {
         {hit.section && (
           <span className="suggestion__section">
             <Highlight hit={hit} attribute="section" tagName="mark" />
+            {hit.subSection && (
+              <>
+                {' '}
+                - <Highlight hit={hit} attribute="subSection" tagName="mark" />
+              </>
+            )}
           </span>
         )}
         <span className="suggestion__content">
@@ -28,7 +35,7 @@ export default function Suggestion({ hit }) {
           .suggestion__section {
             font-size: 0.875rem;
             font-weight: 500;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             display: block;
           }
           .suggestion__content {

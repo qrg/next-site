@@ -83,7 +83,7 @@ function AutoComplete({ hits, refine }) {
           width: 100%;
         }
         .react-autosuggest__suggestion mark {
-          color: var(--geist-foreground);
+          color: #000;
           font-weight: 500;
           background: yellow;
         }
@@ -97,7 +97,6 @@ function AutoComplete({ hits, refine }) {
         .react-autosuggest__suggestions-container--open {
           display: block;
           position: absolute;
-          z-index: 2;
           width: 100%;
           top: 48px;
           left: 0;
