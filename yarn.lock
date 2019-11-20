@@ -5453,10 +5453,10 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-next@9.1.4-canary.5:
-  version "9.1.4-canary.5"
-  resolved "https://registry.yarnpkg.com/next/-/next-9.1.4-canary.5.tgz#2fda2f5d17226d5e6bd7bfde9a90e3f7055dea71"
-  integrity sha512-q7mliLsBIQD4gGHJbDPeM2gVKDy+1rVwNhWiUwH/QuHIIDgLJsH2YEyx008MneqYD94DN3B3LK3rVq0wkuAlVQ==
+next@9.1.5-canary.1:
+  version "9.1.5-canary.1"
+  resolved "https://registry.yarnpkg.com/next/-/next-9.1.5-canary.1.tgz#cb682e37486a3b7c41cd7abd11da7297fff55b94"
+  integrity sha512-YsHcNt+cpdDLHQKkcnT0uU5+sNJAmTHyqCkddUK5JG8hbnKkaRHJRwWr2mA4jV+cI///Yw4HhOg4lYMiAT3IiA==
   dependencies:
     "@ampproject/toolbox-optimizer" "1.1.1"
     "@babel/core" "7.6.4"
@@ -5503,6 +5503,7 @@ next@9.1.4-canary.5:
     mini-css-extract-plugin "0.8.0"
     mkdirp "0.5.1"
     node-fetch "2.6.0"
+    object-assign "4.1.1"
     ora "3.4.0"
     path-to-regexp "3.1.0"
     pnp-webpack-plugin "1.5.0"
@@ -5707,15 +5708,15 @@ oauth@0.9.x:
   resolved "https://registry.yarnpkg.com/oauth/-/oauth-0.9.15.tgz#bd1fefaf686c96b75475aed5196412ff60cfb9c1"
   integrity sha1-vR/vr2hslrdUda7VGWQS/2DPucE=
 
+object-assign@4.1.1, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+  integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
+
 object-assign@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
   integrity sha1-m+3VygiXlJvKR+f/QIBi1Un1h/I=
-
-object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
-  integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
 
 object-copy@^0.1.0:
   version "0.1.0"

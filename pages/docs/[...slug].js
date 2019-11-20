@@ -11,7 +11,6 @@ import Container from '../../components/container';
 import DocsPage from '../../components/docs/docs-page';
 import SocialMeta from '../../components/social-meta';
 import { Sidebar, SidebarMobile, Post, Category } from '../../components/sidebar';
-import Search from '../../components/search';
 
 // These hashes don't need to be redirected to the olds docs because they are covered
 // by the first page of the new docs
@@ -82,7 +81,6 @@ const Docs = ({ routes, route, html }) => {
         <Container>
           <div className="content">
             <Sidebar fixed>
-              <Search />
               <SidebarRoutes routes={routes} />
             </Sidebar>
             <DocsPage path={route.path} html={html} />

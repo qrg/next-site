@@ -1,9 +1,13 @@
 import cn from 'classnames';
+import Search from '../search';
 
 export default function Sidebar({ active, children, fixed }) {
   return (
     <aside className={cn('sidebar', { active, fixed })}>
-      {children}
+      <div className="sidebar-search">
+        <Search />
+      </div>
+      <div className="sidebar-content">{children}</div>
       <style jsx>{`
         .sidebar {
           background: #fff;
@@ -15,13 +19,26 @@ export default function Sidebar({ active, children, fixed }) {
         }
         .sidebar.fixed {
           position: fixed;
-          bottom: 0;
-          height: calc(100vh - 64px - 2rem);
-          overflow-y: auto;
+          top: 0;
+          height: 100vh;
+          padding-top: calc(64px + 2rem);
+          padding-bottom: 0;
+          display: flex;
+          flex-direction: column;
           z-index: 1;
         }
+        .sidebar-search {
+          position: relative;
+          margin-bottom: 1rem;
+          z-index: 1;
+        }
+        .sidebar-content {
+          overflow-y: auto;
+          padding-bottom: 1.5rem;
+        }
         @media screen and (max-width: 950px) {
-          .sidebar {
+          .sidebar,
+          .sidebar.fixed {
             display: none;
           }
           .sidebar.active {
