@@ -4,6 +4,7 @@ import { connectAutoComplete } from 'react-instantsearch-dom';
 import cn from 'classnames';
 import SearchIcon from '../icons/search';
 import Suggestion from './suggestion';
+import NoResults from './no-results';
 
 function renderSuggestion(hit) {
   return <Suggestion hit={hit} />;
@@ -41,6 +42,8 @@ function AutoComplete({ hits, refine }) {
         getSuggestionValue={() => inputValue}
         highlightFirstSuggestion
       />
+
+      <NoResults />
 
       <style jsx>{`
         .input-container {
@@ -90,7 +93,6 @@ function AutoComplete({ hits, refine }) {
         .react-autosuggest__suggestions-container {
           display: none;
           max-height: calc(100vh - 144px);
-          min-height: 200px;
           overflow-y: auto;
           padding-bottom: 1.5rem;
         }
@@ -98,7 +100,7 @@ function AutoComplete({ hits, refine }) {
           display: block;
           position: absolute;
           width: 100%;
-          top: 48px;
+          top: 3rem;
           left: 0;
           background: #fff;
         }
@@ -122,7 +124,7 @@ function AutoComplete({ hits, refine }) {
         }
         .react-autosuggest__suggestion--highlighted a {
           background: #fafafa;
-          border-color: #eaeaea;
+          border-color: #d8d8d8;
         }
         .react-autosuggest__suggestion--highlighted a span {
           color: #000;
