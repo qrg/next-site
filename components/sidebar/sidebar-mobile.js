@@ -65,24 +65,17 @@ export default function SidebarMobile({ children }) {
         .sidebar-search :global(.react-autosuggest__suggestions-container) {
           max-height: none;
         }
-        .sidebar-search :global(.react-autosuggest__suggestions-container--open) {
-          top: 113px;
-          bottom: calc(153px - 100vh);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-          z-index: 1;
-        }
-        .sidebar-search :global(.react-autosuggest__suggestions-list) {
-          height: auto;
-        }
-        .sidebar-search :global(.react-autosuggest__suggestion) {
-          padding-left: 0.75rem;
-        }
+        .sidebar-search :global(.react-autosuggest__suggestions-container--open),
         .sidebar-search :global(.no-results) {
           top: 113px;
           left: 0;
           right: 0;
           bottom: calc(153px - 100vh);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          z-index: 1;
+        }
+        .sidebar-search :global(.react-autosuggest__suggestion) {
+          padding-left: 0.75rem;
         }
         #dropdown-input {
           display: none;
@@ -134,6 +127,17 @@ export default function SidebarMobile({ children }) {
           .dropdown-toggle,
           .docs-dropdown {
             display: block;
+          }
+        }
+        @media screen and (max-width: 640px) {
+          .sidebar-search :global(.react-autosuggest__suggestions-container--open),
+          .sidebar-search :global(.no-results),
+          .opened ~ .docs-dropdown {
+            bottom: calc(203px - 100vh);
+          }
+          .sidebar-search :global(.react-autosuggest__suggestions-container--open),
+          .sidebar-search :global(.no-results) {
+            top: 163px;
           }
         }
       `}</style>
