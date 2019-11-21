@@ -8,26 +8,27 @@ import Search from '../search';
 
 export default function SidebarMobile({ children }) {
   const router = useRouter();
-  const [searching, setSearching] = useState(false);
   const [opened, setOpen] = useState(false);
   const menuRef = useRef();
   const searchRef = useRef();
+  const openMenu = () => {
+    disableBodyScroll(menuRef.current);
+    setOpen(true);
+  };
+  const closeMenu = () => {
+    enableBodyScroll(menuRef.current);
+    setOpen(false);
+  };
   const onSearchStart = () => {
     disableBodyScroll(searchRef.current);
-    setSearching(true);
+    closeMenu();
   };
   const onSearchClear = () => {
     enableBodyScroll(searchRef.current);
-    setSearching(false);
   };
   const toggleOpen = () => {
-    if (opened) {
-      enableBodyScroll(menuRef.current);
-      setOpen(false);
-    } else {
-      disableBodyScroll(menuRef.current);
-      setOpen(true);
-    }
+    if (opened) closeMenu();
+    else openMenu();
   };
 
   // Close the menu after a page navigation
@@ -67,7 +68,6 @@ export default function SidebarMobile({ children }) {
           display: none;
           border-top: 1px solid #f5f5f5;
           padding: 0.5rem 0;
-          z-index: 1;
         }
         #dropdown-input {
           display: none;

@@ -92,6 +92,7 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear, mobile }) {
           top: 113px;
           bottom: calc(153px - 100vh);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          z-index: 1;
         }
         .mobile :global(.react-autosuggest__suggestions-list) {
           height: auto;
