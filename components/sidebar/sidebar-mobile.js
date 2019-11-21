@@ -1,39 +1,74 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import cn from 'classnames';
 import Container from '../container';
 import ArrowRightSidebar from '../icons/arrow-right-sidebar';
+import Search from '../search';
 
 export default function SidebarMobile({ children }) {
   const router = useRouter();
+  const [searching, setSearching] = useState(false);
   const [opened, setOpen] = useState(false);
+  const menuRef = useRef();
+  const searchRef = useRef();
+  const onSearchStart = () => {
+    disableBodyScroll(searchRef.current);
+    setSearching(true);
+  };
+  const onSearchClear = () => {
+    enableBodyScroll(searchRef.current);
+    setSearching(false);
+  };
   const toggleOpen = () => {
-    setOpen(!opened);
+    if (opened) {
+      enableBodyScroll(menuRef.current);
+      setOpen(false);
+    } else {
+      disableBodyScroll(menuRef.current);
+      setOpen(true);
+    }
   };
 
   // Close the menu after a page navigation
   useEffect(() => {
-    if (opened) setOpen(false);
+    if (opened) {
+      disableBodyScroll(menuRef.current);
+      setOpen(false);
+    }
+    return () => {
+      clearAllBodyScrollLocks();
+    };
   }, [router.asPath]);
 
   return (
-    <>
+    <Container>
+      <div className="sidebar-search" ref={searchRef}>
+        <Search mobile onSearchStart={onSearchStart} onSearchClear={onSearchClear} />
+      </div>
       <label htmlFor="dropdown-input" className={cn('dropdown-toggle', { opened })}>
         <input id="dropdown-input" type="checkbox" checked={opened} onChange={toggleOpen} />
         <div className="docs-select">
-          <Container>
-            <ArrowRightSidebar fill="#999" />
-            Menu
-          </Container>
+          <ArrowRightSidebar fill="#999" />
+          Menu
         </div>
       </label>
-      <div className="docs-dropdown">
+      <div className="docs-dropdown" ref={menuRef}>
         <Container>
           <nav>{children}</nav>
         </Container>
       </div>
-
       <style jsx>{`
+        .sidebar {
+          display: flex;
+          width: 100%;
+        }
+        .sidebar-search {
+          display: none;
+          border-top: 1px solid #f5f5f5;
+          padding: 0.5rem 0;
+          z-index: 1;
+        }
         #dropdown-input {
           display: none;
         }
@@ -42,12 +77,14 @@ export default function SidebarMobile({ children }) {
           display: none;
         }
         .docs-select {
-          height: 3rem;
+          display: flex;
+          height: 2.5rem;
           width: 100%;
-          border-top: 1px solid #f5f5f5;
           line-height: 3rem;
+          align-items: center;
           text-align: left;
           cursor: pointer;
+          border-top: 1px solid #f5f5f5;
         }
         .docs-dropdown {
           display: none;
@@ -58,7 +95,7 @@ export default function SidebarMobile({ children }) {
           bottom: 100%;
           background: white;
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-          transition: bottom 0.3s ease;
+          transition: bottom 0.2s ease-out;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
         }
@@ -67,7 +104,7 @@ export default function SidebarMobile({ children }) {
           padding: 10px 19px;
         }
         .opened ~ .docs-dropdown {
-          bottom: -60vh;
+          bottom: calc(153px - 100vh);
           border-top: 1px solid #eaeaea;
         }
         .docs-select :global(svg) {
@@ -78,12 +115,13 @@ export default function SidebarMobile({ children }) {
           transform: rotate(90deg);
         }
         @media screen and (max-width: 950px) {
+          .sidebar-search,
           .dropdown-toggle,
           .docs-dropdown {
             display: block;
           }
         }
       `}</style>
-    </>
+    </Container>
   );
 }
