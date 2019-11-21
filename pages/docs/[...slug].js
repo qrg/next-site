@@ -46,7 +46,7 @@ function SidebarRoutes({ isMobile, routes: currentRoutes, level = 1 }) {
     const selected = slug === '/docs' ? false : slug.startsWith(pathname);
     const route = { href, path, title, pathname, selected };
 
-    return <Post key={title} level={level} route={route} />;
+    return <Post key={title} isMobile={isMobile} level={level} route={route} />;
   });
 }
 

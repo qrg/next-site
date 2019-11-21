@@ -2,12 +2,12 @@ import { useRef, useEffect } from 'react';
 import cn from 'classnames';
 import NavLink from './nav-link';
 
-export default function Post({ route, level = 1, onClick, ...props }) {
+export default function Post({ isMobile, route, level = 1, onClick, ...props }) {
   const selectedRef = useRef();
   const ref = route.selected ? selectedRef : null;
 
   useEffect(() => {
-    if (ref && ref.current) {
+    if (ref && ref.current && !isMobile) {
       ref.current.scrollIntoView({ block: 'center' });
     }
   }, [ref]);
