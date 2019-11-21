@@ -69,7 +69,7 @@ export default function SidebarMobile({ children }) {
         }
         .sidebar-search :global(.react-autosuggest__suggestions-container),
         .sidebar-search :global(.no-results) {
-          top: 100%;
+          top: calc(100% - 40px); /* 40px is the size of the menu */
           bottom: 100%;
           left: 0;
           right: 0;
