@@ -34,6 +34,7 @@ export default function SidebarMobile({ children }) {
   // Close the menu after a page navigation
   useEffect(() => {
     if (opened) closeMenu();
+    enableBodyScroll(searchRef.current);
     return () => {
       clearAllBodyScrollLocks();
     };
@@ -42,7 +43,7 @@ export default function SidebarMobile({ children }) {
   return (
     <Container>
       <div className="sidebar-search" ref={searchRef}>
-        <Search mobile onSearchStart={onSearchStart} onSearchClear={onSearchClear} />
+        <Search onSearchStart={onSearchStart} onSearchClear={onSearchClear} />
       </div>
       <label htmlFor="dropdown-input" className={cn('dropdown-toggle', { opened })}>
         <input id="dropdown-input" type="checkbox" checked={opened} onChange={toggleOpen} />

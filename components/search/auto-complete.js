@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AutoSuggest from 'react-autosuggest';
 import { connectAutoComplete } from 'react-instantsearch-dom';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ function renderSuggestion(hit) {
   return <Suggestion hit={hit} />;
 }
 
-function AutoComplete({ hits, refine, onSearchStart, onSearchClear, mobile }) {
+function AutoComplete({ hits, refine, onSearchStart, onSearchClear }) {
   const [inputValue, setValue] = useState('');
   const [hasFocus, setFocus] = useState(false);
   const router = useRouter();
@@ -28,6 +28,11 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear, mobile }) {
     onBlur: onFocus,
     onFocus
   };
+
+  // Close the search after a page navigation
+  useEffect(() => {
+    if (inputValue) setValue('');
+  }, [router.asPath]);
 
   return (
     <div className={cn('input-container', { focused: hasFocus })}>
@@ -54,7 +59,7 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear, mobile }) {
           }
         }}
         getSuggestionValue={() => inputValue}
-        highlightFirstSuggestion={!mobile}
+        highlightFirstSuggestion
       />
 
       <NoResults />
