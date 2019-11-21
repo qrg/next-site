@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import AutoSuggest from 'react-autosuggest';
 import { connectAutoComplete } from 'react-instantsearch-dom';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ function renderSuggestion(hit) {
   return <Suggestion hit={hit} />;
 }
 
-function AutoComplete({ hits, refine, onSearchStart, onSearchClear }) {
+function AutoComplete({ hits, refine, onSearchStart, onSearchClear, containerRef }) {
   const [inputValue, setValue] = useState('');
   const [hasFocus, setFocus] = useState(false);
   const router = useRouter();
@@ -28,6 +28,18 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear }) {
     onBlur: onFocus,
     onFocus
   };
+  const renderSuggestionsContainer = useCallback(({ containerProps, children }) => {
+    const { ref, ...props } = containerProps;
+    const newRef = element => {
+      if (containerRef) containerRef.current = element;
+      ref(element);
+    };
+    return (
+      <div ref={newRef} {...props}>
+        {children}
+      </div>
+    );
+  }, []);
 
   // Close the search after a page navigation
   useEffect(() => {
@@ -44,6 +56,7 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear }) {
         inputProps={inputProps}
         suggestions={hits}
         renderSuggestion={renderSuggestion}
+        renderSuggestionsContainer={renderSuggestionsContainer}
         onSuggestionsFetchRequested={({ value }) => {
           if (onSearchStart) onSearchStart();
           refine(value);

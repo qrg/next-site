@@ -42,8 +42,12 @@ export default function SidebarMobile({ children }) {
 
   return (
     <Container>
-      <div className="sidebar-search" ref={searchRef}>
-        <Search onSearchStart={onSearchStart} onSearchClear={onSearchClear} />
+      <div className="sidebar-search">
+        <Search
+          containerRef={searchRef}
+          onSearchStart={onSearchStart}
+          onSearchClear={onSearchClear}
+        />
       </div>
       <label htmlFor="dropdown-input" className={cn('dropdown-toggle', { opened })}>
         <input id="dropdown-input" type="checkbox" checked={opened} onChange={toggleOpen} />
