@@ -30,7 +30,7 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear, mobile }) {
   };
 
   return (
-    <div className={cn('input-container', { focused: hasFocus, mobile })}>
+    <div className={cn('input-container', { focused: hasFocus })}>
       <span className="icon">
         <SearchIcon />
       </span>
@@ -92,21 +92,6 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear, mobile }) {
           border: none;
           outline: 0;
           padding-right: 1rem;
-        }
-        .mobile :global(.react-autosuggest__suggestions-container) {
-          max-height: none;
-        }
-        .mobile :global(.react-autosuggest__suggestions-container--open) {
-          top: 113px;
-          bottom: calc(153px - 100vh);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-          z-index: 1;
-        }
-        .mobile :global(.react-autosuggest__suggestions-list) {
-          height: auto;
-        }
-        .mobile :global(.react-autosuggest__suggestion) {
-          padding-left: 0.75rem;
         }
       `}</style>
       <style jsx global>{`
