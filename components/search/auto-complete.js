@@ -11,7 +11,7 @@ function renderSuggestion(hit) {
   return <Suggestion hit={hit} />;
 }
 
-function AutoComplete({ hits, refine, onSearchStart, onSearchClear, containerRef }) {
+function AutoComplete({ id, hits, refine, onSearchStart, onSearchClear, containerRef }) {
   const [inputValue, setValue] = useState('');
   const [hasFocus, setFocus] = useState(false);
   const router = useRouter();
@@ -56,6 +56,7 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear, containerRef
       </span>
 
       <AutoSuggest
+        id={id}
         inputProps={inputProps}
         suggestions={hits}
         renderSuggestion={renderSuggestion}

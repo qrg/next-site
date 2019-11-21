@@ -9,6 +9,7 @@ export default function Sidebar({ active, children, fixed }) {
     <aside className={cn('sidebar', { active, fixed, searching })}>
       <div className="sidebar-search">
         <Search
+          id="desktop-search"
           onSearchStart={() => setSearching(true)}
           onSearchClear={() => setSearching(false)}
         />

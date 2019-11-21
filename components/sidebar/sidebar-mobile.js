@@ -44,6 +44,7 @@ export default function SidebarMobile({ children }) {
     <Container>
       <div className="sidebar-search">
         <Search
+          id="mobile-search"
           containerRef={searchRef}
           onSearchStart={onSearchStart}
           onSearchClear={onSearchClear}
