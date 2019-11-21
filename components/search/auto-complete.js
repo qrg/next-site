@@ -28,18 +28,21 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear, containerRef
     onBlur: onFocus,
     onFocus
   };
-  const renderSuggestionsContainer = useCallback(({ containerProps, children }) => {
-    const { ref, ...props } = containerProps;
-    const newRef = element => {
-      if (containerRef) containerRef.current = element;
-      ref(element);
-    };
-    return (
-      <div ref={newRef} {...props}>
-        {children}
-      </div>
-    );
-  }, []);
+  const renderSuggestionsContainer = useCallback(
+    ({ containerProps, children }) => {
+      const { ref, ...props } = containerProps;
+      const newRef = element => {
+        if (containerRef) containerRef.current = element;
+        ref(element);
+      };
+      return (
+        <div ref={newRef} {...props}>
+          {children}
+        </div>
+      );
+    },
+    [containerRef]
+  );
 
   // Close the search after a page navigation
   useEffect(() => {
