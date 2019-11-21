@@ -33,10 +33,7 @@ export default function SidebarMobile({ children }) {
 
   // Close the menu after a page navigation
   useEffect(() => {
-    if (opened) {
-      disableBodyScroll(menuRef.current);
-      setOpen(false);
-    }
+    if (opened) closeMenu();
     return () => {
       clearAllBodyScrollLocks();
     };
