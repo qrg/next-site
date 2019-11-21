@@ -77,7 +77,8 @@ export default function SidebarMobile({ children }) {
         }
         .sidebar-search :global(.react-autosuggest__suggestions-container--open),
         .sidebar-search :global(.no-results) {
-          bottom: calc(153px - 100vh);
+          min-height: 80px;
+          bottom: calc(153px - 90vh);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
           z-index: 1;
         }
@@ -119,7 +120,8 @@ export default function SidebarMobile({ children }) {
           padding: 10px 19px;
         }
         .opened ~ .docs-dropdown {
-          bottom: calc(153px - 100vh);
+          min-height: 80px;
+          bottom: calc(153px - 90vh);
           border-top: 1px solid #eaeaea;
         }
         .docs-select :global(svg) {
@@ -140,11 +142,7 @@ export default function SidebarMobile({ children }) {
           .sidebar-search :global(.react-autosuggest__suggestions-container--open),
           .sidebar-search :global(.no-results),
           .opened ~ .docs-dropdown {
-            bottom: calc(203px - 100vh);
-          }
-          .sidebar-search :global(.react-autosuggest__suggestions-container--open),
-          .sidebar-search :global(.no-results) {
-            top: 163px;
+            bottom: calc(203px - 90vh);
           }
         }
       `}</style>
