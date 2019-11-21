@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { Highlight, Snippet } from 'react-instantsearch-dom';
 
-export default function Suggestion({ hit }) {
+export function getHitLinkProps(hit) {
   const hash = hit.anchor ? `#${hit.anchor}` : '';
-  const pathname = hit.path + hash;
+  return { href: '/docs/[...slug]', as: hit.path + hash };
+}
 
+export default function Suggestion({ hit }) {
   return (
-    <Link href="/docs/[...slug]" as={pathname}>
+    <Link {...getHitLinkProps(hit)}>
       <a>
         <span className="suggestion__title">
           <Highlight hit={hit} attribute="title" tagName="mark" />

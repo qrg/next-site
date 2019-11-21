@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import AutoSuggest from 'react-autosuggest';
 import { connectAutoComplete } from 'react-instantsearch-dom';
+import { useRouter } from 'next/router';
 import cn from 'classnames';
 import SearchIcon from '../icons/search';
-import Suggestion from './suggestion';
+import Suggestion, { getHitLinkProps } from './suggestion';
 import NoResults from './no-results';
 
 function renderSuggestion(hit) {
@@ -13,6 +14,7 @@ function renderSuggestion(hit) {
 function AutoComplete({ hits, refine, onSearchStart, onSearchClear, mobile }) {
   const [inputValue, setValue] = useState('');
   const [hasFocus, setFocus] = useState(false);
+  const router = useRouter();
   const onFocus = () => {
     setFocus(!hasFocus);
   };
@@ -45,8 +47,14 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear, mobile }) {
           if (onSearchClear) onSearchClear();
           refine();
         }}
+        onSuggestionSelected={(e, { suggestion, method }) => {
+          if (method === 'enter') {
+            const { href, as } = getHitLinkProps(suggestion);
+            router.push(href, as);
+          }
+        }}
         getSuggestionValue={() => inputValue}
-        highlightFirstSuggestion
+        highlightFirstSuggestion={!mobile}
       />
 
       <NoResults />
