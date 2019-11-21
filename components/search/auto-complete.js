@@ -114,6 +114,13 @@ function AutoComplete({ hits, refine, onSearchStart, onSearchClear, containerRef
           outline: 0;
           padding-right: 1rem;
         }
+
+        @media screen and (max-width: 960px) {
+          .input-container :global(.react-autosuggest__input),
+          .input-container :global(.no-results) {
+            font-size: 1rem;
+          }
+        }
       `}</style>
       <style jsx global>{`
         .react-autosuggest__container {
