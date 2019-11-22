@@ -154,6 +154,7 @@ function AutoComplete({
           font-size: 0.875rem;
           border: none;
           outline: 0;
+          padding: 0;
           padding-right: 1rem;
         }
 
@@ -168,6 +169,8 @@ function AutoComplete({
         .react-autosuggest__container {
           display: flex;
           width: 100%;
+          height: 100%;
+          padding: 1px 1px 1px 0; /* Don't let this div damage the border radius of .input-container */
         }
         .react-autosuggest__suggestion mark {
           color: #000;
