@@ -117,6 +117,7 @@ function AutoComplete({
           return '';
         }}
         alwaysRenderSuggestions={isMobile}
+        focusInputOnSuggestionClick={false}
         highlightFirstSuggestion
       />
 
