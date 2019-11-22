@@ -26,13 +26,10 @@ async function addRecords(filePath) {
   const tree = await processor.parse(md);
   const slugger = new GithubSlugger();
   const records = [];
-  const record = {};
+  let record = {};
   const headings = {
     1(value) {
-      record.title = value;
-
-      delete record.section;
-      delete record.subSection;
+      record = { title: value };
     },
     2(value) {
       record.section = value;
