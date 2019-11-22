@@ -142,15 +142,16 @@ function DocsPage({ path, html }) {
         }
         .docs details {
           margin: 1rem 0;
-          padding: 0 0.5rem;
+          padding: 0.25rem 0.5rem;
           background: #f9f9f9;
         }
         .docs details[open] {
           overflow: hidden;
         }
         .docs details > summary {
-          cursor: pointer;
           font-weight: 500;
+          outline: none;
+          cursor: pointer;
         }
 
          {
