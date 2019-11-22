@@ -53,18 +53,12 @@ export default class Popover extends PureComponent {
   }
 
   render() {
-    const {
-      bottom: _bottom,
-      left: _left,
-      right: _right,
-      content,
-      children
-    } = this.props;
+    const { bottom: _bottom, left: _left, right: _right, content, children } = this.props;
     const { show, left, right, bottom } = this.state;
 
     return (
       <div
-        className="container"
+        className={classNames('container', { show })}
         ref={el => (this.containerEl = el)}
         onTouchStart={this.onMouseEnter}
         onMouseEnter={this.onMouseEnter}
@@ -75,6 +69,7 @@ export default class Popover extends PureComponent {
             .container {
               position: relative;
               display: inline-block;
+              overflow: hidden;
             }
             .popover {
               position: absolute;
@@ -82,8 +77,7 @@ export default class Popover extends PureComponent {
               padding: 0.5rem 1rem;
               border-radius: 7px;
               background: white;
-              box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08),
-                0 0 8px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 0 8px rgba(0, 0, 0, 0.1);
               transition: opacity 0.2s ease;
               transform: translateX(-50%);
               opacity: 0;
@@ -136,6 +130,9 @@ export default class Popover extends PureComponent {
             .popover.show {
               opacity: 1;
               visibility: visible;
+            }
+            .container.show {
+              overflow: visible;
             }
           `}
         </style>
