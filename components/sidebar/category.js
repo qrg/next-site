@@ -7,6 +7,7 @@ export default function Category({ level = 1, title, selected, opened, children 
   const toggleCategory = () => setToggle(!toggle);
   const levelClass = `level-${level}`;
 
+  // If a category is selected indirectly, open it. This can happen when using the search input
   useEffect(() => {
     if (selected) {
       setToggle(true);
