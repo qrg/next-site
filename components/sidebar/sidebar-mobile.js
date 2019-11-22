@@ -66,7 +66,6 @@ export default function SidebarMobile({ children }) {
       <style jsx>{`
         .sidebar-search {
           display: none;
-          border-top: 1px solid #f5f5f5;
           padding: 0.5rem 0;
           z-index: 1;
         }
@@ -102,7 +101,6 @@ export default function SidebarMobile({ children }) {
           align-items: center;
           text-align: left;
           cursor: pointer;
-          border-top: 1px solid #f5f5f5;
         }
         .docs-dropdown {
           display: none;
@@ -118,8 +116,7 @@ export default function SidebarMobile({ children }) {
           -webkit-overflow-scrolling: touch;
         }
         .docs-dropdown nav {
-          border-left: 1px solid #eaeaea;
-          padding: 10px 19px;
+          padding: 10px 0;
         }
         .opened ~ .docs-dropdown {
           min-height: 80px;
@@ -127,6 +124,7 @@ export default function SidebarMobile({ children }) {
           border-top: 1px solid #eaeaea;
         }
         .docs-select :global(svg) {
+          margin-left: 1px;
           margin-right: 14px;
           transition: transform 0.15s ease;
         }
