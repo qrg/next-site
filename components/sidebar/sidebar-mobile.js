@@ -1,13 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { useState, useRef } from 'react';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import cn from 'classnames';
 import Container from '../container';
 import ArrowRightSidebar from '../icons/arrow-right-sidebar';
 import Search from '../search';
 
 export default function SidebarMobile({ children }) {
-  const router = useRouter();
   const [opened, setOpen] = useState(false);
   const menuRef = useRef();
   const searchRef = useRef();
@@ -19,6 +17,10 @@ export default function SidebarMobile({ children }) {
     enableBodyScroll(menuRef.current);
     setOpen(false);
   };
+  const toggleOpen = () => {
+    if (opened) closeMenu();
+    else openMenu();
+  };
   const onSearchStart = () => {
     disableBodyScroll(searchRef.current);
     closeMenu();
@@ -26,19 +28,9 @@ export default function SidebarMobile({ children }) {
   const onSearchClear = () => {
     enableBodyScroll(searchRef.current);
   };
-  const toggleOpen = () => {
+  const onRouteChange = () => {
     if (opened) closeMenu();
-    else openMenu();
   };
-
-  // Close the menu after a page navigation
-  useEffect(() => {
-    if (opened) closeMenu();
-    enableBodyScroll(searchRef.current);
-    return () => {
-      clearAllBodyScrollLocks();
-    };
-  }, [router.asPath]);
 
   return (
     <Container>
@@ -49,6 +41,7 @@ export default function SidebarMobile({ children }) {
           containerRef={searchRef}
           onSearchStart={onSearchStart}
           onSearchClear={onSearchClear}
+          onRouteChange={onRouteChange}
         />
       </div>
       <label htmlFor="dropdown-input" className={cn('dropdown-toggle', { opened })}>
@@ -84,7 +77,7 @@ export default function SidebarMobile({ children }) {
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         .sidebar-search :global(.react-autosuggest__suggestion) {
-          padding: 0 2rem;
+          padding: 0;
         }
         #dropdown-input {
           display: none;

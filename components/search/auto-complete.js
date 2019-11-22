@@ -2,16 +2,27 @@ import { useState, useEffect, useCallback } from 'react';
 import AutoSuggest from 'react-autosuggest';
 import { connectAutoComplete } from 'react-instantsearch-dom';
 import { useRouter } from 'next/router';
+import { clearAllBodyScrollLocks } from 'body-scroll-lock';
 import cn from 'classnames';
 import SearchIcon from '../icons/search';
 import Suggestion, { getHitLinkProps } from './suggestion';
 import NoResults from './no-results';
+import Container from '../container';
 
 function renderSuggestion(hit) {
   return <Suggestion hit={hit} />;
 }
 
-function AutoComplete({ id, isMobile, hits, refine, onSearchStart, onSearchClear, containerRef }) {
+function AutoComplete({
+  id,
+  containerRef,
+  isMobile,
+  hits,
+  refine,
+  onSearchStart,
+  onSearchClear,
+  onRouteChange
+}) {
   const [inputValue, setValue] = useState('');
   const [hasFocus, setFocus] = useState(false);
   const router = useRouter();
@@ -35,18 +46,28 @@ function AutoComplete({ id, isMobile, hits, refine, onSearchStart, onSearchClear
         if (containerRef) containerRef.current = element;
         ref(element);
       };
-      return (
+
+      return isMobile ? (
+        <div ref={newRef} {...props}>
+          <Container>{children}</Container>
+        </div>
+      ) : (
         <div ref={newRef} {...props}>
           {children}
         </div>
       );
     },
-    [containerRef]
+    [containerRef, isMobile]
   );
 
-  // Close the search after a page navigation
   useEffect(() => {
-    if (inputValue) setValue('');
+    if (isMobile && inputValue) {
+      setValue('');
+      refine();
+      if (onRouteChange) onRouteChange();
+      if (onSearchClear) onSearchClear();
+      clearAllBodyScrollLocks();
+    }
   }, [router.asPath]);
 
   return (
@@ -84,7 +105,15 @@ function AutoComplete({ id, isMobile, hits, refine, onSearchStart, onSearchClear
             router.push(href, as);
           }
         }}
-        getSuggestionValue={() => inputValue}
+        getSuggestionValue={() => {
+          if (!isMobile) return inputValue;
+
+          // When a suggestion is selected, close the search before the page navigation
+          if (onRouteChange) onRouteChange();
+          clearAllBodyScrollLocks();
+
+          return '';
+        }}
         alwaysRenderSuggestions={isMobile}
         highlightFirstSuggestion
       />
