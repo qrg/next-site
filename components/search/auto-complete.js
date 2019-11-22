@@ -61,12 +61,14 @@ function AutoComplete({
   );
 
   useEffect(() => {
-    if (isMobile && inputValue) {
-      setValue('');
-      refine();
+    if (isMobile) {
       if (onRouteChange) onRouteChange();
-      if (onSearchClear) onSearchClear();
-      clearAllBodyScrollLocks();
+      if (inputValue) {
+        setValue('');
+        refine();
+        if (onSearchClear) onSearchClear();
+        clearAllBodyScrollLocks();
+      }
     }
   }, [router.asPath]);
 
