@@ -5,7 +5,6 @@ import url from 'url';
 
 import { setToken, removeToken, getToken, getTokenPayload } from '../lib/learn/authenticate';
 import { UserProvider } from '../lib/learn/user';
-import NProgress from '../components/nprogress';
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -67,7 +66,6 @@ export default class MyApp extends App {
         <UserProvider user={user}>
           <Component {...pageProps} />
         </UserProvider>
-        <NProgress />
       </>
     );
   }

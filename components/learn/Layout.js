@@ -1,6 +1,7 @@
 import { SkipNavContent } from '@reach/skip-nav';
 import { RecordsProvider } from '../../lib/learn/records';
 import { MediaQueryConsumer } from '../media-query';
+import NProgress from '../nprogress';
 import Page from '../page';
 import Header from '../header';
 import Navbar from '../navbar';
@@ -79,6 +80,7 @@ const Layout = ({ meta, children }) => (
     />
     <SkipNavContent />
     <Footer />
+    <NProgress />
   </Page>
 );
 
