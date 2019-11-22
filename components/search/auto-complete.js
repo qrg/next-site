@@ -94,7 +94,7 @@ function AutoComplete({ id, isMobile, hits, refine, onSearchStart, onSearchClear
       <style jsx>{`
         .input-container {
           width: 100%;
-          height: 2rem;
+          height: 2.5rem;
           display: inline-flex;
           align-items: center;
           transition: border 0.2s ease;
@@ -153,7 +153,7 @@ function AutoComplete({ id, isMobile, hits, refine, onSearchStart, onSearchClear
           display: block;
           position: absolute;
           width: 100%;
-          top: 3.5rem;
+          top: 4rem;
           left: 0;
           background: #fff;
         }
