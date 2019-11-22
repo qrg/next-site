@@ -104,7 +104,6 @@ export default function SidebarMobile({ children }) {
           bottom: 100%;
           background: white;
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-          transition: bottom 0.2s ease-out;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
         }
