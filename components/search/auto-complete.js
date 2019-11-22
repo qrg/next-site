@@ -73,7 +73,7 @@ function AutoComplete({
   }, [router.asPath]);
 
   return (
-    <div className={cn('input-container', { focused: hasFocus })}>
+    <label className={cn('input-container', { focused: hasFocus })}>
       <span className="icon">
         <SearchIcon />
       </span>
@@ -217,7 +217,7 @@ function AutoComplete({
           color: #000;
         }
       `}</style>
-    </div>
+    </label>
   );
 }
 
