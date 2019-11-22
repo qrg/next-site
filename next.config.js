@@ -43,6 +43,7 @@ const nextConfig = {
   pageExtensions: ['jsx', 'js', 'ts', 'tsx', 'mdx'],
   experimental: {
     granularChunks: true,
+    modern: true,
     catchAllRouting: true,
     async rewrites() {
       return [
