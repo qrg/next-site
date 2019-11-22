@@ -11,7 +11,7 @@ function renderSuggestion(hit) {
   return <Suggestion hit={hit} />;
 }
 
-function AutoComplete({ id, hits, refine, onSearchStart, onSearchClear, containerRef }) {
+function AutoComplete({ id, isMobile, hits, refine, onSearchStart, onSearchClear, containerRef }) {
   const [inputValue, setValue] = useState('');
   const [hasFocus, setFocus] = useState(false);
   const router = useRouter();
@@ -62,12 +62,21 @@ function AutoComplete({ id, hits, refine, onSearchStart, onSearchClear, containe
         renderSuggestion={renderSuggestion}
         renderSuggestionsContainer={renderSuggestionsContainer}
         onSuggestionsFetchRequested={({ value }) => {
-          if (onSearchStart) onSearchStart();
+          if (value && onSearchStart) {
+            onSearchStart();
+          }
+          // Call onSearchClear if the input becomes empty, even if it still has focus
+          if (!value && inputValue && onSearchClear) {
+            onSearchClear();
+          }
           refine(value);
         }}
         onSuggestionsClearRequested={() => {
-          if (onSearchClear) onSearchClear();
-          refine();
+          // On mobile, only clear Algolia suggestions if the input is empty
+          if (!isMobile || !inputValue) {
+            if (onSearchClear) onSearchClear();
+            refine();
+          }
         }}
         onSuggestionSelected={(e, { suggestion, method }) => {
           if (method === 'enter') {
@@ -76,6 +85,7 @@ function AutoComplete({ id, hits, refine, onSearchStart, onSearchClear, containe
           }
         }}
         getSuggestionValue={() => inputValue}
+        alwaysRenderSuggestions={isMobile}
         highlightFirstSuggestion
       />
 

@@ -45,6 +45,7 @@ export default function SidebarMobile({ children }) {
       <div className="sidebar-search">
         <Search
           id="mobile-search"
+          isMobile
           containerRef={searchRef}
           onSearchStart={onSearchStart}
           onSearchClear={onSearchClear}
@@ -67,6 +68,7 @@ export default function SidebarMobile({ children }) {
           display: none;
           border-top: 1px solid #f5f5f5;
           padding: 0.5rem 0;
+          z-index: 1;
         }
         .sidebar-search :global(.react-autosuggest__suggestions-container),
         .sidebar-search :global(.no-results) {
@@ -81,7 +83,6 @@ export default function SidebarMobile({ children }) {
           min-height: 80px;
           bottom: calc(153px - 90vh);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-          z-index: 1;
         }
         .sidebar-search :global(.react-autosuggest__suggestion) {
           padding-left: 0.75rem;
