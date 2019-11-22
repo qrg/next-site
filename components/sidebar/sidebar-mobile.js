@@ -84,7 +84,7 @@ export default function SidebarMobile({ children }) {
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         .sidebar-search :global(.react-autosuggest__suggestion) {
-          padding-left: 0.75rem;
+          padding: 0 2rem;
         }
         #dropdown-input {
           display: none;
