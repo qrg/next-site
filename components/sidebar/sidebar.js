@@ -39,7 +39,7 @@ export default function Sidebar({ active, children, fixed }) {
         }
         .sidebar-search {
           position: relative;
-          margin-bottom: 1rem;
+          margin: 1.7rem 0 1.5rem 0;
           z-index: 1;
         }
         .sidebar-content {

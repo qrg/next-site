@@ -153,7 +153,7 @@ function AutoComplete({ id, isMobile, hits, refine, onSearchStart, onSearchClear
           display: block;
           position: absolute;
           width: 100%;
-          top: 3rem;
+          top: 3.5rem;
           left: 0;
           background: #fff;
         }
