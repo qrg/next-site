@@ -52,20 +52,21 @@ async function addRecords(filePath) {
 
     records.push({ ...record, content, path, objectID });
   };
-
-  tree.children.forEach(node => {
+  const handleNode = node => {
     if (node.type === 'heading') {
       if (headings[node.depth]) {
         headings[node.depth](toString(node));
       }
     } else if (node.type === 'paragraph' || node.type === 'blockquote') {
       addRecord(node);
-    } else if (node.type === 'list') {
+    } else if (node.type === 'list' || node.type === 'listItem') {
       if (node.children) {
-        node.children.forEach(addRecord);
+        node.children.forEach(handleNode);
       }
     }
-  });
+  };
+
+  tree.children.forEach(handleNode);
 
   return records;
 }
