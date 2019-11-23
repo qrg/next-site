@@ -114,7 +114,7 @@ export async function unstable_getStaticProps({ params }) {
   const docsPage = await import('../../lib/docs/page');
   const props = await docsPage.getStaticProps(params);
 
-  return { props, revalidate: 60 };
+  return { props, revalidate: 1 };
 }
 
 export default Docs;
