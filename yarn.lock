@@ -4909,6 +4909,13 @@ json-stringify-safe@~5.0.1:
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
 
+json5@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/json5/-/json5-2.1.1.tgz#81b6cb04e9ba496f1c7005d07b4368a2638f90b6"
+  integrity sha512-l+3HXD0GEI3huGq1njuqtzYK8OYJyXMkOLtQ53pjWh89tvWS2h6l+1zMkYWqlb57+SiQodKZyvMEFb2X+KrFhQ==
+  dependencies:
+    minimist "^1.2.0"
+
 json5@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"
@@ -5593,10 +5600,10 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-next@9.1.5-canary.5:
-  version "9.1.5-canary.5"
-  resolved "https://registry.yarnpkg.com/next/-/next-9.1.5-canary.5.tgz#894dfdaaa6dd708f586901211cf456ba8d1bcbe0"
-  integrity sha512-7lJ3VgtMYqsFCtRH8BZX8/DZQM9/IXBpNoa5QEwredH2do10lQH/bNWPq94/Kmtcj1fvSG9DWW5yH3Ngt0gjSA==
+next@9.1.5-canary.6:
+  version "9.1.5-canary.6"
+  resolved "https://registry.yarnpkg.com/next/-/next-9.1.5-canary.6.tgz#4053095abe13d71431a3c1f604dea4b16da898a4"
+  integrity sha512-odT21IsW629afz85OkyKXxXZAbxYPxlahB9G94k9soM5+ILkB7LAON3qABYzr7WegY+45sLbYZhDPOdGfeVcaQ==
   dependencies:
     "@ampproject/toolbox-optimizer" "1.1.1"
     "@babel/core" "7.7.2"
@@ -5637,6 +5644,7 @@ next@9.1.5-canary.5:
     is-docker "2.0.0"
     is-wsl "2.1.1"
     jest-worker "24.9.0"
+    json5 "2.1.1"
     launch-editor "2.2.1"
     loader-utils "1.2.3"
     lru-cache "5.1.1"
