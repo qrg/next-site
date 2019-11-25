@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Error from 'next/error';
-import { SkipNavContent } from '@reach/skip-nav';
 import { getSlug, removeFromLast } from '../../lib/docs/utils';
 import Page from '../../components/page';
 import PageContent from '../../components/page-content';
@@ -43,7 +42,7 @@ function SidebarRoutes({ isMobile, routes: currentRoutes, level = 1 }) {
 
     const href = '/docs/[...slug]';
     const pathname = removeFromLast(path, '.');
-    const selected = slug === '/docs' ? false : slug.startsWith(pathname);
+    const selected = slug.startsWith(pathname);
     const route = { href, path, title, pathname, selected };
 
     return <Post key={title} isMobile={isMobile} level={level} route={route} />;
@@ -100,7 +99,6 @@ const Docs = ({ routes, route, html }) => {
           description="Production grade React applications that scale. The world’s leading companies use Next.js to build server-rendered applications, static websites, and more."
         />
       </PageContent>
-      <SkipNavContent />
     </Page>
   );
 };
