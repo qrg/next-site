@@ -27,6 +27,7 @@ async function addRecords(filePath) {
   const slugger = new GithubSlugger();
   const records = [];
   let record = {};
+  let position = 0;
   const headings = {
     1(value) {
       record = { title: value };
@@ -47,7 +48,8 @@ async function addRecords(filePath) {
     const path = removeFromLast(filePath, '.');
     const objectID = `${path}-${md5(content)}`;
 
-    records.push({ ...record, content, path, objectID });
+    records.push({ ...record, content, path, objectID, position });
+    position += 1;
   };
   const handleNode = node => {
     if (node.type === 'heading') {
