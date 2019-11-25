@@ -53,8 +53,14 @@ async function addRecords(filePath) {
   };
   const handleNode = node => {
     if (node.type === 'heading') {
+      const value = toString(node);
+
       if (headings[node.depth]) {
-        headings[node.depth](toString(node));
+        headings[node.depth](value);
+      } else {
+        // Unhandled headings are added in its own record as the content
+        record.anchor = slugger.slug(value);
+        addRecord(node);
       }
     } else if (node.type === 'paragraph' || node.type === 'blockquote') {
       addRecord(node);
