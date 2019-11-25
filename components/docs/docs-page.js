@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { GITHUB_URL, REPO_NAME, REPO_BRANCH } from '../../lib/github-constants';
+import Notification from './notification';
 
 function areEqual(prevProps, props) {
   return prevProps.path === props.path;
@@ -10,6 +11,10 @@ function DocsPage({ path, html }) {
 
   return (
     <div className="docs">
+      <Notification>
+        <strong>Note:</strong> You are viewing the new Next.js documentation. The old docs are still
+        available <a href="/docs/old">here</a>.
+      </Notification>
       {/* eslint-disable-next-line */}
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <footer>

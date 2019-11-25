@@ -5,6 +5,7 @@ import { InlineCode, Code } from './text/code';
 import { GenericLink } from './text/link';
 import Heading from './heading';
 import Sidebar from './sidebar';
+import Notification from './notification';
 
 export default function Documentation({ children, headings }) {
   return (
@@ -14,6 +15,11 @@ export default function Documentation({ children, headings }) {
       <div className="documentation">
         <Sidebar headings={headings} desktop />
         <div className="documentation__container">
+          <Notification marginTop="3rem" mobileWidth="640px">
+            <strong>Note:</strong> You are viewing the old Next.js documentation. For the latest
+            features and a better experience please see{' '}
+            <a href="/docs/getting-started">the new docs</a>.
+          </Notification>
           <div className="documentation__content">{children}</div>
         </div>
 
