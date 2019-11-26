@@ -13,7 +13,13 @@ import { Sidebar, SidebarMobile, Post, Category } from '../../components/sidebar
 
 // These hashes don't need to be redirected to the olds docs because they are covered
 // by the first page of the new docs
-const excludedHashes = ['how-to-use', 'quick-start', 'manual-setup'];
+const excludedHashes = [
+  'how-to-use',
+  'quick-start',
+  'manual-setup',
+  'setup',
+  'system-requirements'
+];
 // This sections will always start opened
 const defaultOpened = ['basic-features', 'pages'];
 
