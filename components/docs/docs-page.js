@@ -43,9 +43,7 @@ function DocsPage({ path, html }) {
         }
       `}</style>
       <style jsx global>{`
-         {
-          /* Headings */
-        }
+        /* Headings */
         .docs h1 {
           font-size: 3rem;
           font-weight: 700;
@@ -94,9 +92,7 @@ function DocsPage({ path, html }) {
           }
         }
 
-         {
-          /* Inline code */
-        }
+        /* Inline code */
         .docs code.inline {
           color: rgb(212, 0, 255);
           font-size: 0.9em;
@@ -104,9 +100,7 @@ function DocsPage({ path, html }) {
           transition: color 0.2s ease;
         }
 
-         {
-          /* Code */
-        }
+        /* Code */
         .docs pre {
           padding: 1.25rem;
           margin: 1rem 0;
@@ -120,9 +114,7 @@ function DocsPage({ path, html }) {
           line-height: 20px;
         }
 
-         {
-          /* Links */
-        }
+        /* Links */
         .docs a.absolute > code.inline {
           color: #0074de;
         }
@@ -142,9 +134,7 @@ function DocsPage({ path, html }) {
           color: gray;
         }
 
-         {
-          /* details */
-        }
+        /* details */
         .docs details {
           margin: 1rem 0;
           padding: 0.25rem 0.5rem;
@@ -159,9 +149,7 @@ function DocsPage({ path, html }) {
           cursor: pointer;
         }
 
-         {
-          /* Quotes */
-        }
+        /* Quotes */
         .docs blockquote {
           margin: 1rem 0;
           padding: 1rem 1.25rem;
@@ -174,9 +162,42 @@ function DocsPage({ path, html }) {
           background: white;
         }
 
-         {
-          /* Misc */
+        /* Card */
+        .docs .card {
+          margin: 1.5rem 0;
+          border-radius: 5px;
+          border: 1px solid #f3f3f3;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+          transition: box-shadow 0.2s ease;
         }
+        .docs .card:hover {
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .docs .card > a {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          color: #666666;
+          padding: 1.5rem;
+          border: none;
+          transition: color 0.2s ease;
+        }
+        .docs .card > a:hover {
+          color: #111;
+        }
+        .docs .card > a > h4 {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #111;
+          margin-top: 0;
+          margin-bottom: 0.25rem;
+        }
+        .docs .card > a > small {
+          font-size: 0.875rem;
+          color: inherit;
+        }
+
+        /* Misc */
         .docs hr {
           border: 0;
           border-top: 1px solid #f3f3f3;
